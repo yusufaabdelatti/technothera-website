@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &mdash; Technothera</title>
+  <meta name="description" content="Technothera builds intelligent systems that transform psychological knowledge into practical, scalable technology &mdash; for clinics, cognitive development, and child-centered institutions.">
+  <meta property="og:title" content="Technothera &mdash; Where Psychology Meets Technology">
+  <meta property="og:description" content="PsySights, Cognitive Suite, and Smart Dismissal System &mdash; human-centered technology for clinics, cognition, and institutions.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230B1320'/><g transform='translate(50,52) scale(0.34)'><path d='M -60,0 L -44,0 L -44,-24 L -28,-24 L -28,19 L -12,19 L -12,-16' fill='none' stroke='%236366F1' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M -12,-16 C 0,-44 13,35 28,0 C 38,-24 48,24 60,0' fill='none' stroke='%234FB8A8' stroke-width='10' stroke-linecap='round'/><circle cx='-12' cy='-16' r='9' fill='%23F0F4F8'/></g></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* Hero */
+    .about-hero{background:var(--color-navy);padding:140px 0 100px;position:relative;overflow:hidden;}
+    .about-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(99,102,241,.1) 0%,transparent 60%);pointer-events:none;}
+    .about-hero__eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(79,184,168,.12);color:var(--color-teal);font-size:0.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:24px;}
+    .about-hero h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;color:#fff;line-height:1.15;max-width:700px;margin-bottom:24px;}
+    .about-hero__sub{font-size:1.15rem;color:rgba(255,255,255,.6);max-width:560px;line-height:1.7;}
+
+    /* Story section */
+    .story-section{padding:100px 0;background:#fff;}
+    .story-container{max-width:800px;margin:0 auto;padding:0 24px;}
+    .story-eyebrow{font-size:0.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-teal);margin-bottom:16px;}
+    .story-heading{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--color-navy);line-height:1.15;margin-bottom:44px;letter-spacing:-.02em;}
+    .story-subheading{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,1.85rem);font-weight:800;color:var(--color-navy);line-height:1.2;margin-bottom:32px;margin-top:0;letter-spacing:-.02em;}
+    .story-body p{font-size:1.05rem;line-height:1.9;color:var(--color-navy);opacity:.75;margin-bottom:22px;}
+    .story-body blockquote{font-size:1.1rem;font-style:italic;color:var(--color-navy);border-left:3px solid var(--color-teal);padding:4px 0 4px 24px;margin:32px 0;line-height:1.75;opacity:.85;background:none;}
+    .story-divider{border:none;border-top:2px solid var(--color-teal);width:60px;margin:3rem auto;margin-left:0;}
+    .story-sub-eyebrow{font-size:0.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-teal);margin-bottom:12px;}
+
+    /* Vision & Mission */
+    .vision-mission{padding:100px 0;background:var(--color-navy-soft);}
+    .vm-inner{max-width:1280px;margin-inline:auto;padding-inline:24px;}
+    .vm-hdr{text-align:center;margin-bottom:56px;}
+    .vm-tag{font-size:0.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-teal);margin-bottom:16px;display:flex;align-items:center;justify-content:center;gap:8px;}
+    .vm-tag::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-teal);border-radius:2px;}
+    .vm-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:#fff;font-family:var(--font-display);}
+    .vm-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+    .vm-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:44px 40px;}
+    .vm-card__eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-teal);margin-bottom:20px;}
+    .vm-card h3{font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:20px;line-height:1.3;font-family:var(--font-display);}
+    .vm-card__body{font-size:1rem;color:rgba(255,255,255,.62);line-height:1.8;}
+    @media(max-width:768px){.vm-grid{grid-template-columns:1fr;}}
+
+    /* CTA */
+    .about-cta{padding:100px 0;background:var(--color-light);text-align:center;}
+    .about-cta__title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:var(--color-navy);margin-bottom:20px;font-family:var(--font-display);}
+    .about-cta__btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+    .btn-indigo{background:var(--color-indigo);color:#fff;padding:14px 28px;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .1s;box-shadow:0 4px 20px rgba(99,102,241,.3);text-decoration:none;}
+    .btn-indigo:hover{background:var(--color-indigo-dim);transform:translateY(-1px);}
+    .btn-outline{background:transparent;color:var(--color-navy);border:1.5px solid var(--color-border);padding:14px 28px;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .2s;text-decoration:none;}
+    .btn-outline:hover{background:rgba(11,19,32,.05);}
+
+    /* Nav helpers */
+    .nav-dd-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--color-navy);transition:background .15s;}
+    .nav-dd-link:hover{background:var(--color-light);}
+    .nav-dd-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ftr-link{font-size:14px;color:rgba(255,255,255,.55);transition:color .15s;}
+    .ftr-link:hover{color:var(--color-teal);}
+    .ftr-link-sm{font-size:12px;color:rgba(255,255,255,.35);transition:color .15s;}
+    .ftr-link-sm:hover{color:var(--color-teal);}
+    @media(max-width:1024px){.ftr-grid{grid-template-columns:1fr 1fr !important;gap:32px !important;}}
+    @media(max-width:640px){.ftr-grid{grid-template-columns:1fr !important;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="container nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Technothera"><svg class="pulse-icon" viewBox="0 0 200 100" width="40" height="20" aria-hidden="true"><path class="pulse-techno" d="M 10,50 L 26,50 L 26,26 L 42,26 L 42,73 L 58,73 L 58,38" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse-thera" d="M 58,38 C 70,10 83,90 98,50 C 108,26 118,74 130,50 C 138,38 148,62 158,50 C 168,42 178,58 190,50" fill="none" stroke="#4FB8A8" stroke-width="6" stroke-linecap="round"/><circle class="pulse-node" cx="58" cy="38" r="5" fill="#F0F4F8"/></svg><span class="logo-techno">Techno</span><span class="logo-thera">thera</span></a>
+    <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav__links" id="nav-links">
+      <a href="index.html" class="nav__link">Home</a>
+      <div class="nav__dropdown">
+        <button class="nav__link nav__dropbtn">Products
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="nav__dropmenu" id="products-menu">
+          <a href="products/psysights.html" class="nav__droplink">PsySights</a>
+          <a href="products/cognitive-suite.html" class="nav__droplink">Cognitive Suite</a>
+          <a href="products/smart-dismissal-system.html" class="nav__droplink">Smart Dismissal System</a>
+        </div>
+      </div>
+      <a href="about.html" class="nav__link nav__link--active">About</a>
+      <a href="contact.html" class="nav__link">Contact</a>
+      <a href="contact.html" class="btn btn--sm btn--indigo">Get in Touch</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="container">
+    <div class="about-hero__eyebrow">Our Story</div>
+    <h1 data-animate class="fade-up">Built from the inside.</h1>
+    <p class="about-hero__sub fade-up" data-animate>Where psychology meets technology &mdash; and the best systems are built by people who have lived the problems they solve.</p>
+  </div>
+</section>
+
+<!-- FOUNDING STORY -->
+<section class="story-section">
+  <div class="story-container">
+    <p class="story-eyebrow">Our Story</p>
+    <h2 class="story-heading fade-up" data-animate>Built from the inside.</h2>
+
+    <div class="story-body fade-up" data-animate>
+      <p>Technothera was founded by a psychologist with a long-standing passion for technology and building practical solutions to real problems.</p>
+
+      <p>Throughout years of work inside clinics, nurseries, schools, and child-centered environments, a pattern became impossible to ignore: most daily frustrations experienced by professionals, staff, administrators, and families were not caused by a lack of effort or care. They were caused by inefficient systems.</p>
+
+      <p>One question kept surfacing:</p>
+
+      <blockquote>&ldquo;What if technology could understand people the way it understands processes &mdash; and remove friction from human experiences the same way it removes friction from industries?&rdquo;</blockquote>
+
+      <p>The clearest early example appeared during dismissal time at a nursery. The same scene repeated every day: parents waiting outside in difficult conditions, children waiting to be called, staff rushing between classrooms and entrances, administrators trying to coordinate dozens of moving pieces &mdash; all verbally, all reactively, all under pressure. One administrator described it simply as &ldquo;the cursed hour.&rdquo;</p>
+
+      <p>What looked like an operational problem was, underneath, a human experience problem. Parents experienced uncertainty and stress. Staff experienced overload and communication fatigue. Rather than accepting this as normal, we studied it &mdash; mapping workflows, bottlenecks, and communication breakdowns &mdash; and built the Smart Dismissal System to remove that friction entirely.</p>
+
+      <p>That project established the philosophy behind everything Technothera builds: the best technology is not created in isolation. It is built from inside real human experiences, by people who have lived them.</p>
+    </div>
+
+    <hr class="story-divider">
+
+    <p class="story-sub-eyebrow">The Second Direction</p>
+    <h3 class="story-subheading fade-up" data-animate>From observation to measurement.</h3>
+
+    <div class="story-body fade-up" data-animate>
+      <p>The same principle extended naturally into psychology and cognition.</p>
+
+      <p>Working alongside psychiatric clinics, neuropsychologists, neurofeedback therapists, and psychotherapists, two further gaps became clear.</p>
+
+      <p>The first: psychological assessment in most clinics is still a manual, paper-based process &mdash; slow, inconsistent, and difficult to scale across languages or growing patient rosters. PsySights was built to transform this entire workflow into a unified digital platform, without changing the validated instruments clinicians already trust &mdash; only how they are delivered, scored, and reported.</p>
+
+      <p>The second: the tools available for cognitive training and assessment were either too clinical to be accessible, or too informal to be professionally meaningful &mdash; with almost nothing structured, trackable, and clinically grounded in between. The Cognitive Suite was built to occupy that space, turning cognitive exercises into a measurable ecosystem usable by both professionals and families.</p>
+
+      <p>Three products. One underlying conviction: that human-centered environments &mdash; clinics, schools, nurseries, homes &mdash; deserve technology that understands the people inside them before it tries to serve them. That conviction is why Technothera exists.</p>
+    </div>
+  </div>
+</section>
+
+<!-- VISION & MISSION -->
+<section class="vision-mission">
+  <div class="vm-inner">
+    <div class="vm-hdr fade-up" data-animate>
+      <div class="vm-tag">What We Stand For</div>
+      <h2 class="vm-title">Vision &amp; Mission</h2>
+    </div>
+    <div class="vm-grid">
+      <div class="vm-card fade-right" data-animate>
+        <div class="vm-card__eyebrow">Our Vision</div>
+        <h3>To become a global leader in human-centered technology</h3>
+        <p class="vm-card__body">To become a global leader in human-centered technology by transforming psychological knowledge into intelligent systems that improve everyday life, education, healthcare, and human development.</p>
+      </div>
+      <div class="vm-card fade-left" data-animate>
+        <div class="vm-card__eyebrow">Our Mission</div>
+        <h3>To build technology that understands people before serving them</h3>
+        <p class="vm-card__body">To build technology that understands people before serving them. We create products that combine psychology, cognitive science, behavioral understanding, and software engineering to solve meaningful human challenges through scalable digital systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <div class="container">
+    <h2 class="about-cta__title fade-up" data-animate>Want to work together?</h2>
+    <div class="about-cta__btns fade-up" data-animate>
+      <a href="contact.html" class="btn-indigo">Get in Touch <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a href="index.html" class="btn-outline">View Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0B1320;padding-top:80px;">
+  <div style="max-width:1280px;margin-inline:auto;padding-inline:24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:64px;" class="ftr-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><svg class="pulse-icon" viewBox="0 0 200 100" width="44" height="22" aria-hidden="true"><path class="pulse-techno" d="M 10,50 L 26,50 L 26,26 L 42,26 L 42,73 L 58,73 L 58,38" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse-thera" d="M 58,38 C 70,10 83,90 98,50 C 108,26 118,74 130,50 C 138,38 148,62 158,50 C 168,42 178,58 190,50" fill="none" stroke="#4FB8A8" stroke-width="6" stroke-linecap="round"/><circle class="pulse-node" cx="58" cy="38" r="5" fill="#F0F4F8"/></svg><div style="font-family:var(--font-display);font-size:20px;font-weight:800;"><span style="color:var(--color-indigo);">Techno</span><span style="color:var(--color-teal);">thera</span></div></div>
+      <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,.5);max-width:260px;">Where Psychology Meets Technology</p>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Products</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="products/psysights.html" class="ftr-link">PsySights</a>
+        <a href="products/cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
+        <a href="products/smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Company</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="about.html" class="ftr-link">About</a>
+        <a href="contact.html" class="ftr-link">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Contact</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="mailto:technothera@gmail.com" class="ftr-link">technothera@gmail.com</a>
+        <a href="https://wa.me/201116646678" class="ftr-link">WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin-inline:auto;padding-inline:24px;border-top:1px solid rgba(255,255,255,.07);padding-block:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <p style="font-size:12px;color:rgba(255,255,255,.35);">&copy; 2025 Technothera. All Rights Reserved.</p>
+    <div style="display:flex;gap:20px;">
+      <a href="#" class="ftr-link-sm">Privacy Policy</a>
+      <a href="#" class="ftr-link-sm">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  const dropdown = document.querySelector('.nav__dropdown');
+  const dropmenu = document.getElementById('products-menu');
+  if (dropdown && dropmenu) {
+    dropdown.addEventListener('mouseenter', () => {
+      dropmenu.style.display = 'flex';
+      dropmenu.style.flexDirection = 'column';
+    });
+    dropdown.addEventListener('mouseleave', () => dropmenu.style.display = 'none');
+  }
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  }
+</script>
+</body>
+</html>

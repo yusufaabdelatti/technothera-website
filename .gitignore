@@ -1,0 +1,21 @@
+# D:\ is a Windows drive root with unrelated files — exclude everything by default
+/*
+
+# Website root files
+!.gitignore
+!netlify.toml
+!index.html
+!about.html
+!contact.html
+!icon.png
+
+# Website subdirectories
+!/css/
+!/products/
+!/js/
+
+# Exclude development prompt and script files wherever they appear
+*.md
+*.py
+*.txt
+/temp/
