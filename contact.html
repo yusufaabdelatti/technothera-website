@@ -117,24 +117,16 @@
         </div>
 
         <div class="contact-channels">
-          <a href="mailto:technothera@gmail.com" class="contact-channel">
+          <a href="mailto:info@technothera.com" class="contact-channel">
             <div class="contact-channel__icon">
               <svg viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" rx="2"/><path d="M2 7l8 5 8-5"/></svg>
             </div>
             <div>
               <div class="contact-channel__label">Email</div>
-              <div class="contact-channel__value">technothera@gmail.com</div>
+              <div class="contact-channel__value">info@technothera.com</div>
             </div>
           </a>
-          <a href="https://wa.me/201116646678" class="contact-channel" target="_blank" rel="noopener">
-            <div class="contact-channel__icon">
-              <svg viewBox="0 0 20 20"><path d="M17.5 13.2l-2.5-.3a1.2 1.2 0 00-1 .4l-1.1 1.1a10.6 10.6 0 01-5.3-5.3l1.1-1.1a1.2 1.2 0 00.4-1L8.8 4.5A1.2 1.2 0 007.6 3.5H5.5A1.5 1.5 0 004 5.1c.3 7.3 6.1 13 13.4 13.4a1.5 1.5 0 001.6-1.5v-2.1a1.2 1.2 0 00-1.5-1.7z"/></svg>
-            </div>
-            <div>
-              <div class="contact-channel__label">WhatsApp</div>
-              <div class="contact-channel__value">+20 111 664 6678</div>
-            </div>
-          </a>
+
         </div>
 
         <div class="contact-products">
@@ -250,8 +242,7 @@
     <div>
       <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Contact</div>
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="mailto:technothera@gmail.com" class="ftr-link">technothera@gmail.com</a>
-        <a href="https://wa.me/201116646678" class="ftr-link">WhatsApp</a>
+        <a href="mailto:info@technothera.com" class="ftr-link">info@technothera.com</a>
       </div>
     </div>
   </div>
@@ -299,7 +290,7 @@
       if (!valid) return;
       const subject=encodeURIComponent('Technothera Inquiry: '+interest.options[interest.selectedIndex].text);
       const body=encodeURIComponent('Name: '+name.value+'\nInstitution: '+inst.value+'\nType: '+instType.options[instType.selectedIndex].text+'\nInterest: '+interest.options[interest.selectedIndex].text+'\n\nMessage:\n'+(message.value||'(none)'));
-      window.location.href='mailto:technothera@gmail.com?subject='+subject+'&body='+body;
+      window.location.href='mailto:info@technothera.com?subject='+subject+'&body='+body;
       form.style.display='none'; successPanel.classList.add('visible');
     });
   }
