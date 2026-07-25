@@ -88,6 +88,7 @@
         <div class="nav__dropmenu" id="products-menu">
           <a href="products/psysights.html" class="nav__droplink">PsySights</a>
           <a href="products/cognitive-suite.html" class="nav__droplink">Cognitive Suite</a>
+          <a href="products/cue.html" class="nav__droplink">CUE</a>
           <a href="products/smart-dismissal-system.html" class="nav__droplink">Smart Dismissal System</a>
         </div>
       </div>
@@ -134,6 +135,7 @@
           <div class="contact-product-links">
             <a href="products/psysights.html" class="contact-product-link">PsySights</a>
             <a href="products/cognitive-suite.html" class="contact-product-link">Cognitive Suite</a>
+            <a href="products/cue.html" class="contact-product-link">CUE</a>
             <a href="products/smart-dismissal-system.html" class="contact-product-link">Smart Dismissal System</a>
             <a href="about.html" class="contact-product-link">About Technothera</a>
           </div>
@@ -146,6 +148,7 @@
         <p class="contact-form-card__sub">Fill in the form and we&rsquo;ll get back to you within one business day.</p>
 
         <form id="contact-form" novalidate>
+          <input type="hidden" name="_subject" value="New Technothera Inquiry">
           <div class="form-row">
             <div class="form-group">
               <label for="full-name">Full Name <span class="req">*</span></label>
@@ -171,6 +174,7 @@
               <select id="inst-type" name="inst-type" required>
                 <option value="" disabled selected>Select type...</option>
                 <option value="psychiatric-clinic">Psychiatric / Psychology Clinic</option>
+                <option value="aba-clinic">ABA Therapy Clinic</option>
                 <option value="private-school">Private School</option>
                 <option value="international-school">International School</option>
                 <option value="nursery">Nursery / Kindergarten</option>
@@ -185,6 +189,7 @@
                 <option value="" disabled selected>Select interest...</option>
                 <option value="psysights">PsySights</option>
                 <option value="cognitive">Cognitive Suite</option>
+                <option value="cue">CUE</option>
                 <option value="sds">Smart Dismissal System</option>
                 <option value="multiple">Multiple Products</option>
                 <option value="custom">Custom System</option>
@@ -229,6 +234,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <a href="products/psysights.html" class="ftr-link">PsySights</a>
         <a href="products/cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
+        <a href="products/cue.html" class="ftr-link">CUE</a>
         <a href="products/smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
       </div>
     </div>
@@ -268,6 +274,9 @@
   if (hamburger && navLinks) { hamburger.addEventListener('click', () => navLinks.classList.toggle('open')); }
   const form = document.getElementById('contact-form');
   const successPanel = document.getElementById('form-success');
+  // Formspree endpoint — sign up at formspree.io, create a form pointed at
+  // info@technothera.com, then replace this ID with the real one it gives you.
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID';
   function showErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.add('error');if(e)e.classList.add('visible');}
   function clearErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.remove('error');if(e)e.classList.remove('visible');}
   ['full-name','institution','email','inst-type','interest'].forEach(id => {
@@ -288,10 +297,28 @@
       if (!instType.value)                                     { showErr('inst-type');   valid=false; }
       if (!interest.value)                                     { showErr('interest');    valid=false; }
       if (!valid) return;
-      const subject=encodeURIComponent('Technothera Inquiry: '+interest.options[interest.selectedIndex].text);
-      const body=encodeURIComponent('Name: '+name.value+'\nInstitution: '+inst.value+'\nType: '+instType.options[instType.selectedIndex].text+'\nInterest: '+interest.options[interest.selectedIndex].text+'\n\nMessage:\n'+(message.value||'(none)'));
-      window.location.href='mailto:info@technothera.com?subject='+subject+'&body='+body;
-      form.style.display='none'; successPanel.classList.add('visible');
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form),
+      }).then((res) => {
+        if (!res.ok) throw new Error('Form submission failed');
+        form.style.display = 'none';
+        successPanel.classList.add('visible');
+      }).catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        const subject = encodeURIComponent('Technothera Inquiry: ' + interest.options[interest.selectedIndex].text);
+        const body = encodeURIComponent('Name: ' + name.value + '\nInstitution: ' + inst.value + '\nType: ' + instType.options[instType.selectedIndex].text + '\nInterest: ' + interest.options[interest.selectedIndex].text + '\n\nMessage:\n' + (message.value || '(none)'));
+        alert("We couldn't send that automatically, so we're opening your email app instead — please hit send there.");
+        window.location.href = 'mailto:info@technothera.com?subject=' + subject + '&body=' + body;
+      });
     });
   }
 </script>

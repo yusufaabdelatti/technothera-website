@@ -69,7 +69,8 @@
     .products__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-indigo);border-radius:2px;}
     .products__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-bottom:10px;}
     .products__sub{font-size:17px;color:var(--color-text-muted);max-width:560px;margin-inline:auto;line-height:1.65;}
-    .products-grid{max-width:1280px;margin-inline:auto;padding-inline:24px;margin-top:56px;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:28px;align-items:stretch;}
+    .products-grid{max-width:1280px;margin-inline:auto;padding-inline:24px;margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch;}
+    .pc__pill--violet{background:rgba(139,92,246,.12);color:#8B5CF6;}
     .pc{background:var(--color-light);border-radius:18px;padding:36px 32px;border:1.5px solid var(--color-border);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s;text-decoration:none;}
     .pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-indigo);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;border-radius:0 2px 2px 0;}
     .pc:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(11,19,32,.12);border-color:transparent;}
@@ -205,6 +206,10 @@
             <span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
             Cognitive Suite
           </a>
+          <a href="products/cue.html" class="nav-dd-link">
+            <span class="nav-dd-icon" style="background:rgba(139,92,246,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
+            CUE
+          </a>
           <a href="products/smart-dismissal-system.html" class="nav-dd-link">
             <span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
             Smart Dismissal System
@@ -227,6 +232,7 @@
     <span style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);padding:8px 12px;">Products</span>
     <a href="products/psysights.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">PsySights</a>
     <a href="products/cognitive-suite.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Cognitive Suite</a>
+    <a href="products/cue.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">CUE</a>
     <a href="products/smart-dismissal-system.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Smart Dismissal System</a>
     <a href="about.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">About</a>
     <a href="contact.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Contact</a>
@@ -316,7 +322,7 @@
 <section class="products">
   <div class="products__hdr fade-up" data-animate>
     <div class="products__eyebrow">Our Products</div>
-    <h2 class="products__h2">Three systems. One philosophy.</h2>
+    <h2 class="products__h2">Four systems. One philosophy.</h2>
     <p class="products__sub">Each product begins with a human problem &mdash; and becomes a scalable piece of technology.</p>
   </div>
   <div class="products-grid">
@@ -345,6 +351,20 @@
         <span class="pc__stat">Clinical-Grade Variables</span>
       </div>
       <p class="pc__idea">&ldquo;Understanding cognition enables human growth.&rdquo;</p>
+      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <!-- CUE -->
+    <a href="products/cue.html" class="pc fade-up" data-animate>
+      <span class="pc__pill pc__pill--violet">Offline-First PWA &middot; ABA Therapists &amp; Clinics</span>
+      <div class="pc__name">CUE</div>
+      <p class="pc__desc">An offline-first session-delivery app for ABA therapists &mdash; trial-by-trial data collection, behavior tracking, and progress monitoring, all on one screen, all without needing the internet.</p>
+      <div class="pc__stats">
+        <span class="pc__stat">Fully Offline</span>
+        <span class="pc__stat">Trial-by-Trial Data</span>
+        <span class="pc__stat">Auto Progress Graphs</span>
+      </div>
+      <p class="pc__idea">&ldquo;Less time on paperwork. More time with the child.&rdquo;</p>
       <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
 
@@ -432,6 +452,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <a href="products/psysights.html" class="ftr-link">PsySights</a>
         <a href="products/cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
+        <a href="products/cue.html" class="ftr-link">CUE</a>
         <a href="products/smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
       </div>
     </div>
