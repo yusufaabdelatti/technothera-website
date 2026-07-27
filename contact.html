@@ -159,7 +159,6 @@
         <p class="contact-form-card__sub">Fill in the form and we&rsquo;ll get back to you within one business day.</p>
 
         <form id="contact-form" novalidate>
-          <input type="hidden" name="_subject" value="New Technothera Inquiry">
           <div class="form-row">
             <div class="form-group">
               <label for="full-name">Full Name <span class="req">*</span></label>
@@ -372,7 +371,6 @@
   });
   const form = document.getElementById('contact-form');
   const successPanel = document.getElementById('form-success');
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnqedk';
   function showErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.add('error');if(e)e.classList.add('visible');}
   function clearErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.remove('error');if(e)e.classList.remove('visible');}
   ['full-name','institution','email','phone','inst-type','interest'].forEach(id => {
@@ -405,10 +403,25 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
 
-      fetch(FORMSPREE_ENDPOINT, {
+      const contactMethod = (form.querySelector('input[name="contact-method"]:checked') || {}).value || 'email';
+      const topicsArr = Array.from(form.querySelectorAll('input[name="topics"]:checked')).map((cb) => cb.value);
+      const referralEl = document.getElementById('referral');
+
+      fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          'full-name': name.value.trim(),
+          institution: inst.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          'contact-method': contactMethod,
+          'inst-type': instType.value,
+          interest: interest.value,
+          topics: topicsArr,
+          referral: referralEl ? referralEl.value : '',
+          message: message.value.trim(),
+        }),
       }).then((res) => {
         if (!res.ok) throw new Error('Form submission failed');
         form.style.display = 'none';
@@ -416,9 +429,7 @@
       }).catch(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
-        const contactMethod = (form.querySelector('input[name="contact-method"]:checked') || {}).value || 'email';
-        const topics = Array.from(form.querySelectorAll('input[name="topics"]:checked')).map((cb) => cb.value).join(', ');
-        const referralEl = document.getElementById('referral');
+        const topicsText = topicsArr.join(', ');
         const referralText = referralEl && referralEl.value ? referralEl.options[referralEl.selectedIndex].text : '';
         const subject = encodeURIComponent('Technothera Inquiry: ' + interest.options[interest.selectedIndex].text);
         const body = encodeURIComponent(
@@ -428,7 +439,7 @@
           '\nPreferred Contact: ' + (contactMethod === 'whatsapp' ? 'WhatsApp' : 'Email') +
           '\nType: ' + instType.options[instType.selectedIndex].text +
           '\nInterest: ' + interest.options[interest.selectedIndex].text +
-          (topics ? '\nTopics: ' + topics : '') +
+          (topicsText ? '\nTopics: ' + topicsText : '') +
           (referralText ? '\nHeard About Us Via: ' + referralText : '') +
           '\n\nMessage:\n' + (message.value || '(none)')
         );

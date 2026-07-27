@@ -8,11 +8,13 @@
 !about.html
 !contact.html
 !icon.png
+!package.json
 
 # Website subdirectories
 !/css/
 !/products/
 !/js/
+!/api/
 
 # Exclude development prompt and script files wherever they appear
 *.md
