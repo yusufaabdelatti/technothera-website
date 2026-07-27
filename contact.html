@@ -274,9 +274,7 @@
   if (hamburger && navLinks) { hamburger.addEventListener('click', () => navLinks.classList.toggle('open')); }
   const form = document.getElementById('contact-form');
   const successPanel = document.getElementById('form-success');
-  // Formspree endpoint — sign up at formspree.io, create a form pointed at
-  // info@technothera.com, then replace this ID with the real one it gives you.
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mbdnqedk';
   function showErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.add('error');if(e)e.classList.add('visible');}
   function clearErr(id){ const f=document.getElementById(id);const e=document.getElementById(id+'-error');if(f)f.classList.remove('error');if(e)e.classList.remove('visible');}
   ['full-name','institution','email','inst-type','interest'].forEach(id => {
