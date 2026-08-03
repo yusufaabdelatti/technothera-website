@@ -57,7 +57,9 @@
     .contact-method-toggle input:focus-visible + .cmt-option { box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
     .topics-grid:not([hidden]) { display: flex; flex-wrap: wrap; gap: 8px; }
     .topic-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 14px; border: 1.5px solid rgba(11,19,32,.12); border-radius: 999px; font-size: 0.82rem; font-weight: 500; color: var(--color-navy); cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
-    .topic-chip input[type="checkbox"] { appearance: checkbox; -webkit-appearance: checkbox; width: 15px; height: 15px; padding: 0; margin: 0; border: none; border-radius: 0; background: none; accent-color: var(--color-indigo); flex-shrink: 0; cursor: pointer; }
+    .topic-chip input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; padding: 0; margin: 0; border: 1.5px solid rgba(11,19,32,.25); border-radius: 4px; background: #fff; flex-shrink: 0; cursor: pointer; position: relative; transition: background .15s, border-color .15s; }
+    .topic-chip input[type="checkbox"]:checked { background: var(--color-indigo); border-color: var(--color-indigo); }
+    .topic-chip input[type="checkbox"]:checked::after { content: ""; position: absolute; left: 5px; top: 2px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
     .topic-chip.is-checked { border-color: var(--color-indigo); background: rgba(99,102,241,.07); color: var(--color-indigo); }
     .form-submit-row { display: flex; align-items: center; gap: 20px; margin-top: 8px; flex-wrap: wrap; }
     .form-note { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.5; flex: 1; min-width: 180px; }
