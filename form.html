@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Website Request Form &mdash; Technothera</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%230B1320'/><g transform='translate(50,52) scale(0.34)'><path d='M -60,0 L -44,0 L -44,-24 L -28,-24 L -28,19 L -12,19 L -12,-16' fill='none' stroke='%236366F1' stroke-width='10' stroke-linecap='round' stroke-linejoin='round'/><path d='M -12,-16 C 0,-44 13,35 28,0 C 38,-24 48,24 60,0' fill='none' stroke='%234FB8A8' stroke-width='10' stroke-linecap='round'/><circle cx='-12' cy='-16' r='9' fill='%23F0F4F8'/></g></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body { background: var(--color-light); }
+    .wizard-page { padding: 48px 24px 100px; min-height: 100vh; }
+    .wizard-header { max-width: 720px; margin: 0 auto 28px; text-align: center; }
+    .wizard-header .logo-line { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; }
+    .wizard-header h1 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-navy); font-family: var(--font-display); margin-bottom: 8px; }
+    .wizard-header p { font-size: 0.95rem; color: var(--color-text-muted); }
+
+    .progress-track { max-width: 720px; margin: 0 auto 32px; display: flex; align-items: center; gap: 8px; }
+    .progress-step { flex: 1; height: 6px; border-radius: 999px; background: rgba(11,19,32,.1); position: relative; }
+    .progress-step.is-active, .progress-step.is-done { background: var(--color-indigo); }
+    .progress-labels { max-width: 720px; margin: 0 auto 28px; display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--color-text-muted); }
+    .progress-labels span.is-active { color: var(--color-indigo); }
+
+    .wizard-card { max-width: 720px; margin: 0 auto; background: #fff; border-radius: 24px; padding: 44px 40px; box-shadow: 0 8px 40px rgba(11,19,32,.08); }
+    .wizard-step { display: none; }
+    .wizard-step.is-visible { display: block; }
+    .wizard-step h2 { font-size: 1.25rem; font-weight: 700; color: var(--color-navy); font-family: var(--font-display); margin-bottom: 4px; }
+    .wizard-step__sub { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 28px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--color-navy); margin-bottom: 7px; }
+    .form-group label .req { color: var(--color-indigo); margin-left: 2px; }
+    .form-group label .opt { color: var(--color-text-muted); font-weight: 400; }
+    .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="tel"],
+    .form-group input[type="url"], .form-group select, .form-group textarea {
+      width: 100%; padding: 12px 16px; border: 1.5px solid rgba(11,19,32,.12); border-radius: 10px;
+      font-family: var(--font-body); font-size: 0.95rem; color: var(--color-navy); background: #fff;
+      transition: border-color .2s, box-shadow .2s; outline: none; box-sizing: border-box; appearance: none;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-indigo); box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
+    .form-group input.error, .form-group textarea.error { border-color: #E05C5C; box-shadow: 0 0 0 3px rgba(224,92,92,.1); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .field-error { font-size: 0.77rem; color: #E05C5C; margin-top: 5px; display: none; }
+    .field-error.visible { display: block; }
+    .field-hint { font-size: 0.78rem; color: var(--color-text-muted); font-weight: 400; }
+
+    .repeat-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; }
+    .repeat-row { border: 1.5px solid rgba(11,19,32,.1); border-radius: 12px; padding: 16px; position: relative; }
+    .repeat-row .form-group:last-child { margin-bottom: 0; }
+    .repeat-row__remove { position: absolute; top: 10px; right: 12px; background: none; border: none; color: var(--color-text-muted); font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+    .repeat-row__remove:hover { color: #E05C5C; }
+    .btn-add { display: inline-flex; align-items: center; gap: 6px; background: rgba(99,102,241,.08); color: var(--color-indigo); border: 1.5px dashed rgba(99,102,241,.3); border-radius: 10px; padding: 10px 16px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background .2s; }
+    .btn-add:hover { background: rgba(99,102,241,.14); }
+
+    .checkbox-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .check-chip { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border: 1.5px solid rgba(11,19,32,.12); border-radius: 999px; font-size: 0.85rem; font-weight: 500; color: var(--color-navy); cursor: pointer; transition: border-color .2s, background .2s, color .2s; }
+    .check-chip input[type="checkbox"] { appearance: checkbox; -webkit-appearance: checkbox; width: 15px; height: 15px; padding: 0; margin: 0; border: none; background: none; accent-color: var(--color-indigo); flex-shrink: 0; cursor: pointer; }
+    .check-chip.is-checked { border-color: var(--color-indigo); background: rgba(99,102,241,.07); color: var(--color-indigo); }
+
+    .logo-upload { display: flex; align-items: center; gap: 16px; }
+    .logo-upload__preview { width: 64px; height: 64px; border-radius: 12px; border: 1.5px dashed rgba(11,19,32,.15); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; background: var(--color-light); }
+    .logo-upload__preview img { width: 100%; height: 100%; object-fit: contain; }
+    .logo-upload__input-wrap { flex: 1; }
+    .logo-upload__remove { display: none; margin-top: 6px; background: none; border: none; color: var(--color-text-muted); font-size: 0.78rem; font-weight: 600; cursor: pointer; }
+    .logo-upload__remove:hover { color: #E05C5C; }
+    .logo-upload__remove.visible { display: inline-block; }
+
+    .wizard-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; gap: 16px; }
+    .btn-indigo { background: var(--color-indigo); color: #fff; padding: 13px 26px; border-radius: 10px; font-family: var(--font-display); font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: background .2s, transform .1s; }
+    .btn-indigo:hover { background: var(--color-indigo-dim); transform: translateY(-1px); }
+    .btn-indigo:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+    .btn-back { background: transparent; color: var(--color-text-muted); padding: 13px 20px; border-radius: 10px; font-family: var(--font-display); font-size: 14px; font-weight: 600; border: none; cursor: pointer; }
+    .btn-back:hover { color: var(--color-navy); }
+    .btn-back.is-hidden { visibility: hidden; }
+
+    .submit-error { background: #FDECEC; border: 1px solid rgba(224,92,92,.3); color: #C0392B; padding: 12px 16px; border-radius: 10px; font-size: 0.85rem; margin-top: 16px; display: none; }
+    .submit-error.visible { display: block; }
+
+    #wizard-success { display: none; text-align: center; padding: 40px 10px; }
+    #wizard-success.visible { display: block; }
+    .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(79,184,168,.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .success-icon svg { width: 32px; height: 32px; stroke: var(--color-teal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    #wizard-success h3 { font-size: 1.3rem; font-weight: 700; color: var(--color-navy); margin-bottom: 10px; font-family: var(--font-display); }
+    #wizard-success p { font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+
+    @media (max-width: 640px) {
+      .wizard-card { padding: 32px 22px; }
+      .form-row { grid-template-columns: 1fr; }
+      .wizard-nav { flex-direction: column-reverse; align-items: stretch; }
+      .btn-indigo, .btn-back { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="wizard-page">
+  <div class="wizard-header">
+    <div class="logo-line">
+      <svg class="pulse-icon" viewBox="0 0 200 100" width="36" height="18" aria-hidden="true"><path d="M 10,50 L 26,50 L 26,26 L 42,26 L 42,73 L 58,73 L 58,38" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path d="M 58,38 C 70,10 83,90 98,50 C 108,26 118,74 130,50 C 138,38 148,62 158,50 C 168,42 178,58 190,50" fill="none" stroke="#4FB8A8" stroke-width="6" stroke-linecap="round"/><circle cx="58" cy="38" r="5" fill="#F0F4F8"/></svg>
+      <span style="font-family:var(--font-display);font-size:1.1rem;font-weight:800;"><span style="color:var(--color-indigo);">Techno</span><span style="color:var(--color-teal);">thera</span></span>
+    </div>
+    <h1>Tell us about your organization</h1>
+    <p>A few minutes of your time now saves a lot of back-and-forth later. Everything here goes straight to our team.</p>
+  </div>
+
+  <div class="progress-track" id="progress-track">
+    <div class="progress-step is-active" data-step="1"></div>
+    <div class="progress-step" data-step="2"></div>
+    <div class="progress-step" data-step="3"></div>
+    <div class="progress-step" data-step="4"></div>
+  </div>
+  <div class="progress-labels">
+    <span class="is-active" data-label="1">Organization</span>
+    <span data-label="2">Content</span>
+    <span data-label="3">Contact &amp; Brand</span>
+    <span data-label="4">Structure</span>
+  </div>
+
+  <div class="wizard-card">
+    <form id="intake-form" novalidate>
+
+      <!-- STEP 1 -->
+      <div class="wizard-step is-visible" data-step="1">
+        <h2>Organization Basics</h2>
+        <p class="wizard-step__sub">The essentials &mdash; who you are and what you do.</p>
+
+        <div class="form-group">
+          <label for="orgName">Organization Name <span class="req">*</span></label>
+          <input type="text" id="orgName" placeholder="Cairo Wellness Center" required>
+          <div class="field-error" id="orgName-error">Please enter your organization&rsquo;s name.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="industry">Industry / Field <span class="opt">(optional)</span></label>
+            <input type="text" id="industry" placeholder="Healthcare, Education, Retail...">
+          </div>
+          <div class="form-group">
+            <label for="tagline">Tagline <span class="opt">(optional)</span></label>
+            <input type="text" id="tagline" placeholder="A short line under your name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mission">Mission Statement <span class="opt">(optional)</span></label>
+          <textarea id="mission" placeholder="What is your organization trying to achieve?"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="description">Full Description <span class="opt">(optional)</span></label>
+          <textarea id="description" placeholder="Tell us more about what you do, who you serve, and what makes you different."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="wizard-step" data-step="2">
+        <h2>Content</h2>
+        <p class="wizard-step__sub">What should visitors learn about you?</p>
+
+        <div class="form-group">
+          <label>Services / Programs Offered <span class="opt">(optional)</span></label>
+          <div class="repeat-list" id="services-list"></div>
+          <button type="button" class="btn-add" id="add-service">+ Add a Service</button>
+        </div>
+
+        <div class="form-group">
+          <label for="targetAudience">Target Audience <span class="opt">(optional)</span></label>
+          <input type="text" id="targetAudience" placeholder="Who are your services or products for?">
+        </div>
+        <div class="form-group">
+          <label for="achievements">Key Achievements / Stats <span class="opt">(optional)</span></label>
+          <textarea id="achievements" placeholder="Awards, years in business, numbers you're proud of..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="teamBio">Team / Founders Bio <span class="opt">(optional)</span></label>
+          <textarea id="teamBio" placeholder="A short bio of your team or founders"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Testimonials <span class="opt">(optional)</span></label>
+          <div class="repeat-list" id="testimonials-list"></div>
+          <button type="button" class="btn-add" id="add-testimonial">+ Add a Testimonial</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="wizard-step" data-step="3">
+        <h2>Contact &amp; Brand</h2>
+        <p class="wizard-step__sub">How people reach you, and how your brand should look.</p>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number <span class="req">*</span></label>
+            <input type="tel" id="phone" placeholder="+20 100 123 4567" required>
+            <div class="field-error" id="phone-error">Please enter a valid phone number.</div>
+          </div>
+          <div class="form-group">
+            <label for="contactEmail">Email <span class="req">*</span></label>
+            <input type="email" id="contactEmail" placeholder="contact@yourorg.com" required>
+            <div class="field-error" id="contactEmail-error">Please enter a valid email address.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Physical Address <span class="opt">(optional)</span></label>
+          <input type="text" id="address" placeholder="Street, city, country">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="socialFacebook">Facebook <span class="opt">(optional)</span></label>
+            <input type="text" id="socialFacebook" placeholder="facebook.com/yourorg">
+          </div>
+          <div class="form-group">
+            <label for="socialInstagram">Instagram <span class="opt">(optional)</span></label>
+            <input type="text" id="socialInstagram" placeholder="instagram.com/yourorg">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="socialLinkedin">LinkedIn <span class="opt">(optional)</span></label>
+            <input type="text" id="socialLinkedin" placeholder="linkedin.com/company/yourorg">
+          </div>
+          <div class="form-group">
+            <label for="socialOther">Other Social Links <span class="opt">(optional)</span></label>
+            <input type="text" id="socialOther" placeholder="TikTok, X, YouTube...">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Logo Upload <span class="opt">(optional, image file)</span></label>
+          <div class="logo-upload">
+            <div class="logo-upload__preview" id="logo-preview">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <div class="logo-upload__input-wrap">
+              <input type="file" id="logoFile" accept="image/*">
+              <div class="field-error" id="logoFile-error">That file is too large &mdash; please choose one under 4MB.</div>
+              <button type="button" class="logo-upload__remove" id="logo-remove">Remove logo</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="brandColors">Brand Colors <span class="opt">(optional)</span></label>
+            <input type="text" id="brandColors" placeholder="e.g. #6366F1, navy blue and gold">
+          </div>
+          <div class="form-group">
+            <label for="stylePreference">Style Preference <span class="opt">(optional)</span></label>
+            <input type="text" id="stylePreference" placeholder="modern, corporate, playful, minimal...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="referenceWebsites">Reference Websites You Like <span class="opt">(optional)</span></label>
+          <textarea id="referenceWebsites" placeholder="Paste any URLs of sites whose look or feel you like"></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="wizard-step" data-step="4">
+        <h2>Structure &amp; Extras</h2>
+        <p class="wizard-step__sub">The last few details before we get started.</p>
+
+        <div class="form-group">
+          <label>Pages Needed <span class="opt">(optional)</span></label>
+          <div class="checkbox-grid">
+            <label class="check-chip"><input type="checkbox" name="pages" value="Home">Home</label>
+            <label class="check-chip"><input type="checkbox" name="pages" value="About">About</label>
+            <label class="check-chip"><input type="checkbox" name="pages" value="Services">Services</label>
+            <label class="check-chip"><input type="checkbox" name="pages" value="Contact">Contact</label>
+            <label class="check-chip"><input type="checkbox" name="pages" value="Gallery">Gallery</label>
+            <label class="check-chip"><input type="checkbox" name="pages" value="Blog">Blog</label>
+          </div>
+          <div class="form-group" style="margin-top:12px;margin-bottom:0;">
+            <input type="text" id="pagesOther" placeholder="Other pages (optional)">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Language(s) for the Site <span class="opt">(optional)</span></label>
+          <div class="checkbox-grid">
+            <label class="check-chip"><input type="checkbox" name="languages" value="Arabic">Arabic</label>
+            <label class="check-chip"><input type="checkbox" name="languages" value="English">English</label>
+            <label class="check-chip"><input type="checkbox" name="languages" value="Both">Both</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="existingCopy">Existing Copy / Content to Reuse <span class="opt">(optional)</span></label>
+          <textarea id="existingCopy" placeholder="Paste any existing content here, or note that you'll send it separately"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="submitterName">Your Name <span class="req">*</span></label>
+            <input type="text" id="submitterName" placeholder="Your full name" required>
+            <div class="field-error" id="submitterName-error">Please enter your name.</div>
+          </div>
+          <div class="form-group">
+            <label for="submitterRole">Your Role <span class="opt">(optional)</span></label>
+            <input type="text" id="submitterRole" placeholder="e.g. Founder, Marketing Manager">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="submitterPhone">Your Phone Number <span class="opt">(optional)</span></label>
+          <input type="tel" id="submitterPhone" placeholder="+20 100 123 4567">
+        </div>
+      </div>
+
+      <div class="submit-error" id="submit-error">Something went wrong sending your request. Please try again in a moment, or reach us directly at info@technothera.com.</div>
+
+      <div class="wizard-nav">
+        <button type="button" class="btn-back" id="btn-back">&larr; Back</button>
+        <button type="button" class="btn-indigo" id="btn-next">Next</button>
+        <button type="submit" class="btn-indigo" id="btn-submit" style="display:none;">Submit Request</button>
+      </div>
+    </form>
+
+    <div id="wizard-success">
+      <div class="success-icon">
+        <svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="13"/><path d="M10 16l4 4 8-8"/></svg>
+      </div>
+      <h3>Thank you &mdash; we received your submission!</h3>
+      <p>Our team now has everything you shared and will be in touch shortly to get started.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var TOTAL_STEPS = 4;
+  var currentStep = 1;
+  var form = document.getElementById('intake-form');
+  var steps = document.querySelectorAll('.wizard-step');
+  var progressSteps = document.querySelectorAll('.progress-step');
+  var progressLabels = document.querySelectorAll('.progress-labels span');
+  var btnBack = document.getElementById('btn-back');
+  var btnNext = document.getElementById('btn-next');
+  var btnSubmit = document.getElementById('btn-submit');
+  var submitError = document.getElementById('submit-error');
+  var successPanel = document.getElementById('wizard-success');
+
+  function showErr(id, msg) {
+    var f = document.getElementById(id);
+    var e = document.getElementById(id + '-error');
+    if (f) f.classList.add('error');
+    if (e) { e.classList.add('visible'); if (msg) e.textContent = msg; }
+  }
+  function clearErr(id) {
+    var f = document.getElementById(id);
+    var e = document.getElementById(id + '-error');
+    if (f) f.classList.remove('error');
+    if (e) e.classList.remove('visible');
+  }
+  ['orgName', 'phone', 'contactEmail', 'submitterName'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function () { clearErr(id); });
+  });
+
+  function renderStep() {
+    steps.forEach(function (s) {
+      s.classList.toggle('is-visible', Number(s.getAttribute('data-step')) === currentStep);
+    });
+    progressSteps.forEach(function (p) {
+      var n = Number(p.getAttribute('data-step'));
+      p.classList.toggle('is-active', n === currentStep);
+      p.classList.toggle('is-done', n < currentStep);
+    });
+    progressLabels.forEach(function (l) {
+      l.classList.toggle('is-active', Number(l.getAttribute('data-label')) === currentStep);
+    });
+    btnBack.classList.toggle('is-hidden', currentStep === 1);
+    btnNext.style.display = currentStep === TOTAL_STEPS ? 'none' : 'inline-flex';
+    btnSubmit.style.display = currentStep === TOTAL_STEPS ? 'inline-flex' : 'none';
+    submitError.classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function validateStep(step) {
+    var valid = true;
+    if (step === 1) {
+      var orgName = document.getElementById('orgName');
+      clearErr('orgName');
+      if (!orgName.value.trim()) { showErr('orgName'); valid = false; }
+    }
+    if (step === 3) {
+      var phone = document.getElementById('phone');
+      var email = document.getElementById('contactEmail');
+      clearErr('phone'); clearErr('contactEmail');
+      if (!phone.value.match(/^[0-9+()\-\s]{7,}$/)) { showErr('phone'); valid = false; }
+      if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) { showErr('contactEmail'); valid = false; }
+    }
+    if (step === 4) {
+      var name = document.getElementById('submitterName');
+      clearErr('submitterName');
+      if (!name.value.trim()) { showErr('submitterName'); valid = false; }
+    }
+    return valid;
+  }
+
+  btnNext.addEventListener('click', function () {
+    if (!validateStep(currentStep)) return;
+    currentStep = Math.min(TOTAL_STEPS, currentStep + 1);
+    renderStep();
+  });
+  btnBack.addEventListener('click', function () {
+    currentStep = Math.max(1, currentStep - 1);
+    renderStep();
+  });
+
+  // ---- Repeatable: Services ----
+  var servicesList = document.getElementById('services-list');
+  var serviceCount = 0;
+  function addServiceRow() {
+    serviceCount++;
+    var row = document.createElement('div');
+    row.className = 'repeat-row';
+    row.innerHTML =
+      '<button type="button" class="repeat-row__remove">Remove</button>' +
+      '<div class="form-group"><label>Service / Program Name</label><input type="text" class="service-name" placeholder="e.g. Individual Therapy"></div>' +
+      '<div class="form-group"><label>Short Description</label><textarea class="service-desc" placeholder="A sentence or two about this service"></textarea></div>';
+    row.querySelector('.repeat-row__remove').addEventListener('click', function () { row.remove(); });
+    servicesList.appendChild(row);
+  }
+  document.getElementById('add-service').addEventListener('click', addServiceRow);
+  addServiceRow();
+
+  // ---- Repeatable: Testimonials ----
+  var testimonialsList = document.getElementById('testimonials-list');
+  function addTestimonialRow() {
+    var row = document.createElement('div');
+    row.className = 'repeat-row';
+    row.innerHTML =
+      '<button type="button" class="repeat-row__remove">Remove</button>' +
+      '<div class="form-group"><label>Quote</label><textarea class="testimonial-quote" placeholder="What did they say?"></textarea></div>' +
+      '<div class="form-group" style="margin-bottom:0;"><label>Name</label><input type="text" class="testimonial-name" placeholder="Who said it?"></div>';
+    row.querySelector('.repeat-row__remove').addEventListener('click', function () { row.remove(); });
+    testimonialsList.appendChild(row);
+  }
+  document.getElementById('add-testimonial').addEventListener('click', addTestimonialRow);
+
+  // ---- Checkbox chip highlighting ----
+  document.querySelectorAll('.check-chip input[type="checkbox"]').forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      cb.closest('.check-chip').classList.toggle('is-checked', cb.checked);
+    });
+  });
+
+  // ---- Logo upload ----
+  var logoInput = document.getElementById('logoFile');
+  var logoPreview = document.getElementById('logo-preview');
+  var logoRemoveBtn = document.getElementById('logo-remove');
+  var logoData = null; // { base64, filename, mimeType }
+  var MAX_LOGO_BYTES = 4 * 1024 * 1024;
+
+  logoInput.addEventListener('change', function () {
+    clearErr('logoFile');
+    var file = logoInput.files && logoInput.files[0];
+    if (!file) return;
+    if (file.size > MAX_LOGO_BYTES) {
+      showErr('logoFile');
+      logoInput.value = '';
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var result = reader.result; // data:image/png;base64,....
+      var base64 = result.split(',')[1];
+      logoData = { base64: base64, filename: file.name, mimeType: file.type || 'application/octet-stream' };
+      logoPreview.innerHTML = '<img src="' + result + '" alt="Logo preview">';
+      logoRemoveBtn.classList.add('visible');
+    };
+    reader.readAsDataURL(file);
+  });
+  logoRemoveBtn.addEventListener('click', function () {
+    logoData = null;
+    logoInput.value = '';
+    logoPreview.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+    logoRemoveBtn.classList.remove('visible');
+  });
+
+  // ---- Gather + submit ----
+  function collectServices() {
+    return Array.from(servicesList.querySelectorAll('.repeat-row')).map(function (row) {
+      return {
+        name: row.querySelector('.service-name').value.trim(),
+        description: row.querySelector('.service-desc').value.trim(),
+      };
+    }).filter(function (s) { return s.name || s.description; });
+  }
+  function collectTestimonials() {
+    return Array.from(testimonialsList.querySelectorAll('.repeat-row')).map(function (row) {
+      return {
+        quote: row.querySelector('.testimonial-quote').value.trim(),
+        name: row.querySelector('.testimonial-name').value.trim(),
+      };
+    }).filter(function (t) { return t.quote || t.name; });
+  }
+  function collectChecked(name) {
+    return Array.from(document.querySelectorAll('input[name="' + name + '"]:checked')).map(function (cb) { return cb.value; });
+  }
+  function val(id) {
+    var el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!validateStep(1) || !validateStep(3) || !validateStep(4)) {
+      // Jump back to the first invalid step so the user can see the error
+      if (!validateStep(1)) { currentStep = 1; }
+      else if (!validateStep(3)) { currentStep = 3; }
+      else { currentStep = 4; }
+      renderStep();
+      return;
+    }
+
+    btnSubmit.disabled = true;
+    var originalText = btnSubmit.textContent;
+    btnSubmit.textContent = 'Sending…';
+    submitError.classList.remove('visible');
+
+    var payload = {
+      orgName: val('orgName'),
+      industry: val('industry'),
+      tagline: val('tagline'),
+      mission: val('mission'),
+      description: val('description'),
+      services: collectServices(),
+      targetAudience: val('targetAudience'),
+      achievements: val('achievements'),
+      teamBio: val('teamBio'),
+      testimonials: collectTestimonials(),
+      phone: val('phone'),
+      email: val('contactEmail'),
+      address: val('address'),
+      socials: {
+        facebook: val('socialFacebook'),
+        instagram: val('socialInstagram'),
+        linkedin: val('socialLinkedin'),
+        other: val('socialOther'),
+      },
+      logo: logoData,
+      brandColors: val('brandColors'),
+      stylePreference: val('stylePreference'),
+      referenceWebsites: val('referenceWebsites'),
+      pagesNeeded: collectChecked('pages'),
+      pagesOther: val('pagesOther'),
+      languages: collectChecked('languages'),
+      existingCopy: val('existingCopy'),
+      submitterName: val('submitterName'),
+      submitterRole: val('submitterRole'),
+      submitterPhone: val('submitterPhone'),
+    };
+
+    fetch('/api/submit-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Submission failed');
+      form.style.display = 'none';
+      document.querySelector('.progress-track').style.display = 'none';
+      document.querySelector('.progress-labels').style.display = 'none';
+      successPanel.classList.add('visible');
+    }).catch(function () {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = originalText;
+      submitError.classList.add('visible');
+    });
+  });
+
+  renderStep();
+})();
+</script>
+</body>
+</html>

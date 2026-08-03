@@ -9,6 +9,8 @@
 !contact.html
 !icon.png
 !package.json
+!form.html
+!vercel.json
 
 # Website subdirectories
 !/css/
@@ -20,4 +22,5 @@
 *.md
 *.py
 *.txt
+!robots.txt
 /temp/
