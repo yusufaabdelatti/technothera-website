@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -86,6 +86,10 @@
     .success-icon svg { width: 32px; height: 32px; stroke: var(--color-teal); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     #wizard-success h3 { font-size: 1.3rem; font-weight: 700; color: var(--color-navy); margin-bottom: 10px; font-family: var(--font-display); }
     #wizard-success p { font-size: 0.95rem; color: var(--color-text-muted); line-height: 1.65; max-width: 380px; margin: 0 auto; }
+    .wizard-success__whatsapp { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(11,19,32,.08); }
+    .wizard-success__whatsapp-note { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 14px; }
+    .btn-whatsapp { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: #fff; padding: 12px 24px; border-radius: 10px; font-family: var(--font-display); font-size: 14px; font-weight: 600; text-decoration: none; transition: background .2s, transform .1s; }
+    .btn-whatsapp:hover { background: #1FBE5A; transform: translateY(-1px); }
 
     @media (max-width: 640px) {
       .wizard-card { padding: 32px 22px; }
@@ -322,6 +326,13 @@
       </div>
       <h3>Thank you &mdash; we received your submission!</h3>
       <p>Our team now has everything you shared and will be in touch shortly to get started.</p>
+      <div class="wizard-success__whatsapp">
+        <p class="wizard-success__whatsapp-note">Have logos, product photos, or team photos to send over? Send them to us directly on WhatsApp.</p>
+        <a href="#" id="whatsapp-cta" class="btn-whatsapp" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.004c5.46 0 9.91-4.45 9.91-9.91C21.97 6.45 17.5 2 12.04 2zm0 18.13h-.003a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.17 8.17 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.24 8.24zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.75 2.67 4.24 3.74.59.26 1.06.41 1.42.52.6.19 1.14.16 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+          Send Files on WhatsApp
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -518,7 +529,7 @@
 
     btnSubmit.disabled = true;
     var originalText = btnSubmit.textContent;
-    btnSubmit.textContent = 'Sending…';
+    btnSubmit.textContent = 'Sendingâ€¦';
     submitError.classList.remove('visible');
 
     var payload = {
@@ -563,6 +574,9 @@
       form.style.display = 'none';
       document.querySelector('.progress-track').style.display = 'none';
       document.querySelector('.progress-labels').style.display = 'none';
+      var waMessage = 'Hi Technothera! This is ' + (payload.orgName || 'our team') + ' \u2014 we just submitted our website request form and wanted to follow up by sending over our logo, product photos, team photos, and any other assets you might need.';
+      var whatsappLink = document.getElementById('whatsapp-cta');
+      if (whatsappLink) whatsappLink.href = 'https://wa.me/201031209087?text=' + encodeURIComponent(waMessage);
       successPanel.classList.add('visible');
     }).catch(function () {
       btnSubmit.disabled = false;

@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const PDFDocument = require('pdfkit');
 
 const MAX_LOGO_BYTES = 4 * 1024 * 1024;
 const RECIPIENT = 'technothera@gmail.com';
@@ -112,6 +113,95 @@ function buildEmailHtml(d) {
 </html>`;
 }
 
+function deriveText(d) {
+  const servicesText = (d.services || []).length
+    ? d.services.map((s, i) => `${i + 1}. ${s.name}${s.description ? ' — ' + s.description : ''}`).join('\n')
+    : '';
+  const testimonialsText = (d.testimonials || []).length
+    ? d.testimonials.map((t, i) => `${i + 1}. "${t.quote}"${t.name ? ' — ' + t.name : ''}`).join('\n')
+    : '';
+  const socialsText = [
+    d.socials.facebook ? 'Facebook: ' + d.socials.facebook : '',
+    d.socials.instagram ? 'Instagram: ' + d.socials.instagram : '',
+    d.socials.linkedin ? 'LinkedIn: ' + d.socials.linkedin : '',
+    d.socials.other ? 'Other: ' + d.socials.other : '',
+  ].filter(Boolean).join('\n');
+  const pagesText = [d.pagesNeeded.join(', '), d.pagesOther ? 'Other: ' + d.pagesOther : '']
+    .filter(Boolean).join(' — ');
+  return { servicesText, testimonialsText, socialsText, pagesText };
+}
+
+function buildPdfBuffer(d, derived) {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ margin: 50, size: 'A4' });
+    const chunks = [];
+    doc.on('data', (c) => chunks.push(c));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
+
+    const INDIGO = '#6366F1';
+    const NAVY = '#0B1320';
+    const MUTED = '#6B7585';
+
+    doc.rect(0, 0, doc.page.width, 80).fill(NAVY);
+    doc.fillColor('#FFFFFF').font('Helvetica-Bold').fontSize(20).text('Technothera', 50, 26);
+    doc.fillColor('#B9C2CE').font('Helvetica').fontSize(11).text('Website Request Form Submission', 50, 50);
+
+    doc.y = 105;
+    doc.x = 50;
+
+    function heading(text) {
+      doc.moveDown(0.6);
+      doc.fillColor(INDIGO).font('Helvetica-Bold').fontSize(13).text(text.toUpperCase(), { characterSpacing: 0.5 });
+      const lineY = doc.y + 2;
+      doc.moveTo(50, lineY).lineTo(doc.page.width - 50, lineY).strokeColor(INDIGO).lineWidth(1).stroke();
+      doc.moveDown(0.6);
+    }
+
+    function field(label, value) {
+      if (!value) return;
+      doc.fillColor(MUTED).font('Helvetica-Bold').fontSize(9).text(label.toUpperCase(), { characterSpacing: 0.3 });
+      doc.fillColor(NAVY).font('Helvetica').fontSize(11).text(String(value), { paragraphGap: 8 });
+      doc.moveDown(0.3);
+    }
+
+    heading('Organization Basics');
+    field('Organization Name', d.orgName);
+    field('Industry / Field', d.industry);
+    field('Tagline', d.tagline);
+    field('Mission Statement', d.mission);
+    field('Full Description', d.description);
+
+    heading('Content');
+    field('Services / Programs', derived.servicesText);
+    field('Target Audience', d.targetAudience);
+    field('Key Achievements / Stats', d.achievements);
+    field('Team / Founders Bio', d.teamBio);
+    field('Testimonials', derived.testimonialsText);
+
+    heading('Contact & Brand');
+    field('Phone', d.phone);
+    field('Email', d.email);
+    field('Address', d.address);
+    field('Social Links', derived.socialsText);
+    field('Logo', d.logo ? 'Attached separately — ' + d.logo.filename : 'Not provided');
+    field('Brand Colors', d.brandColors);
+    field('Style Preference', d.stylePreference);
+    field('Reference Websites', d.referenceWebsites);
+
+    heading('Structure & Extras');
+    field('Pages Needed', derived.pagesText);
+    field('Language(s)', d.languages.join(', '));
+    field('Existing Copy to Reuse', d.existingCopy);
+    field('Submitted By', d.submitterName);
+    field('Submitter Role', d.submitterRole);
+    field('Submitter Phone', d.submitterPhone);
+    field('Submitted At', d.timestamp);
+
+    doc.end();
+  });
+}
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -184,7 +274,17 @@ module.exports = async (req, res) => {
     });
   }
 
+  const derived = deriveText(data);
+  const safeOrgName = orgName.replace(/[/\\:*?"<>|]/g, '').trim().substring(0, 60) || 'Website-Request';
+
   try {
+    const pdfBuffer = await buildPdfBuffer(data, derived);
+    attachments.push({
+      filename: `Technothera-Website-Request-${safeOrgName}.pdf`,
+      content: pdfBuffer,
+      contentType: 'application/pdf',
+    });
+
     await transporter.sendMail({
       from: `"Technothera Website Request" <${process.env.GMAIL_USER}>`,
       to: RECIPIENT,
