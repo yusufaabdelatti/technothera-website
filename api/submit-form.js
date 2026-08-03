@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 
 const MAX_LOGO_BYTES = 4 * 1024 * 1024;
+const RECIPIENT = 'technothera@gmail.com';
 
 function escapeHtml(str) {
   return String(str || '').replace(/[&<>"']/g, (c) => ({
@@ -183,12 +184,10 @@ module.exports = async (req, res) => {
     });
   }
 
-  const recipient = process.env.GMAIL_USER;
-
   try {
     await transporter.sendMail({
       from: `"Technothera Website Request" <${process.env.GMAIL_USER}>`,
-      to: recipient,
+      to: RECIPIENT,
       replyTo: email,
       subject: `New Website Request — ${orgName}`,
       html: buildEmailHtml(data),

@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 
-const RECIPIENT = 'info@technothera.com';
+const RECIPIENT = 'technothera@gmail.com';
 
 const INTEREST_LABELS = {
   psysights: 'PsySights',
