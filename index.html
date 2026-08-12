@@ -69,8 +69,9 @@
     .products__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-indigo);border-radius:2px;}
     .products__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-bottom:10px;}
     .products__sub{font-size:17px;color:var(--color-text-muted);max-width:560px;margin-inline:auto;line-height:1.65;}
-    .products-grid{max-width:1280px;margin-inline:auto;padding-inline:24px;margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;align-items:stretch;}
+    .products-grid{max-width:1280px;margin-inline:auto;padding-inline:24px;margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;}
     .pc__pill--violet{background:rgba(139,92,246,.12);color:#8B5CF6;}
+    .pc__pill--blue{background:rgba(37,99,235,.1);color:#2563EB;}
     .pc{background:var(--color-light);border-radius:18px;padding:36px 32px;border:1.5px solid var(--color-border);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s,border-color .25s;text-decoration:none;}
     .pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-indigo);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;border-radius:0 2px 2px 0;}
     .pc:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(11,19,32,.12);border-color:transparent;}
@@ -210,6 +211,10 @@
             <span class="nav-dd-icon" style="background:rgba(139,92,246,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
             CUE
           </a>
+          <a href="products/therassist.html" class="nav-dd-link">
+            <span class="nav-dd-icon" style="background:rgba(37,99,235,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            TherAssist
+          </a>
           <a href="products/smart-dismissal-system.html" class="nav-dd-link">
             <span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>
             Smart Dismissal System
@@ -233,6 +238,7 @@
     <a href="products/psysights.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">PsySights</a>
     <a href="products/cognitive-suite.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Cognitive Suite</a>
     <a href="products/cue.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">CUE</a>
+    <a href="products/therassist.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">TherAssist</a>
     <a href="products/smart-dismissal-system.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Smart Dismissal System</a>
     <a href="about.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">About</a>
     <a href="contact.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Contact</a>
@@ -322,7 +328,7 @@
 <section class="products">
   <div class="products__hdr fade-up" data-animate>
     <div class="products__eyebrow">Our Products</div>
-    <h2 class="products__h2">Four systems. One philosophy.</h2>
+    <h2 class="products__h2">Five systems. One philosophy.</h2>
     <p class="products__sub">Each product begins with a human problem &mdash; and becomes a scalable piece of technology.</p>
   </div>
   <div class="products-grid">
@@ -365,6 +371,20 @@
         <span class="pc__stat">Auto Progress Graphs</span>
       </div>
       <p class="pc__idea">&ldquo;Less time on paperwork. More time with the child.&rdquo;</p>
+      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </a>
+
+    <!-- TherAssist -->
+    <a href="products/therassist.html" class="pc fade-up" data-animate>
+      <span class="pc__pill pc__pill--blue">Clinical Intelligence Platform &middot; Psychotherapists</span>
+      <div class="pc__name">TherAssist</div>
+      <p class="pc__desc">A bilingual, local-first clinical intelligence system for psychotherapists &mdash; structured session notes and case intelligence, with zero-knowledge encryption so no one but the treating therapist can ever read a client&rsquo;s clinical content.</p>
+      <div class="pc__stats">
+        <span class="pc__stat">Bilingual Arabic/English</span>
+        <span class="pc__stat">Zero-Knowledge Encryption</span>
+        <span class="pc__stat">4 Ways to Capture a Session</span>
+      </div>
+      <p class="pc__idea">&ldquo;The only person who can read your notes is you.&rdquo;</p>
       <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </a>
 
@@ -453,6 +473,7 @@
         <a href="products/psysights.html" class="ftr-link">PsySights</a>
         <a href="products/cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
         <a href="products/cue.html" class="ftr-link">CUE</a>
+        <a href="products/therassist.html" class="ftr-link">TherAssist</a>
         <a href="products/smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
       </div>
     </div>
