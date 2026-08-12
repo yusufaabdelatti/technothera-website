@@ -58,7 +58,16 @@
     /* Capture section */
     .capture{padding-block:100px;background:var(--color-light);}
     .capture__inner{max-width:1280px;margin-inline:auto;padding-inline:24px;}
-    .capture-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;}
+    .capture-featured{display:flex;align-items:center;gap:32px;background:linear-gradient(135deg,var(--color-ther) 0%,#1D4ED8 100%);border-radius:20px;padding:40px 44px;margin-top:48px;box-shadow:0 12px 40px rgba(37,99,235,.25);}
+    .capture-featured__icon{width:72px;height:72px;border-radius:16px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff;}
+    .capture-featured__badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:999px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,255,255,.18);color:#fff;margin-bottom:14px;}
+    .capture-featured__title{font-family:var(--font-display);font-size:26px;font-weight:800;color:#fff;margin-bottom:10px;}
+    .capture-featured__desc{font-size:15px;line-height:1.75;color:rgba(255,255,255,.85);margin-bottom:18px;}
+    .capture-featured__list{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;margin:0;}
+    .capture-featured__list li{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,.85);line-height:1.6;}
+    .capture-featured__list li::before{content:'';width:6px;height:6px;border-radius:50%;background:#fff;flex-shrink:0;margin-top:7px;opacity:.8;}
+    .capture__secondary-label{font-family:var(--font-display);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);text-align:center;margin-top:56px;}
+    .capture-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
     .capture-card{background:#fff;border-radius:16px;padding:28px 24px;border:1px solid var(--color-border);transition:box-shadow .2s,transform .2s,border-color .2s;}
     .capture-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px);border-color:rgba(37,99,235,.25);}
     .capture-card__icon{width:40px;height:40px;border-radius:10px;background:rgba(37,99,235,.12);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--color-ther);}
@@ -131,7 +140,7 @@
     .page-cta__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:16px;}
     .page-cta__body{font-size:16px;line-height:1.8;color:rgba(255,255,255,.65);margin-bottom:32px;}
     @media(max-width:1024px){.problem__grid,.bilingual__inner,.tier-grid{grid-template-columns:1fr;gap:24px;}.capture-grid{grid-template-columns:1fr 1fr;}.depth-grid{grid-template-columns:1fr 1fr;}.bilingual__visual{display:none;}}
-    @media(max-width:640px){.capture-grid,.depth-grid{grid-template-columns:1fr;}.problem-card{padding:28px 24px;}.plan-card{padding:32px 24px;}}
+    @media(max-width:640px){.capture-grid,.depth-grid{grid-template-columns:1fr;}.problem-card{padding:28px 24px;}.plan-card{padding:32px 24px;}.capture-featured{flex-direction:column;text-align:center;padding:32px 28px;}.capture-featured__list li{text-align:left;}}
     @media(max-width:1024px){.ftr-grid{grid-template-columns:1fr 1fr !important;gap:32px !important;}}
     @media(max-width:640px){.ftr-grid{grid-template-columns:1fr !important;}}
   </style>
@@ -197,7 +206,7 @@
     <div class="hero__pills" data-hero-anim="460">
       <span class="pill">Bilingual Arabic/English</span>
       <span class="pill">Zero-Knowledge Encryption</span>
-      <span class="pill">4 Ways to Capture a Session</span>
+      <span class="pill">Automatic Meeting Capture</span>
       <span class="pill">AI Drafts, You Approve</span>
     </div>
   </div>
@@ -245,8 +254,24 @@
     <div class="fade-up" data-animate style="text-align:center;">
       <span class="eyebrow" style="justify-content:center;color:var(--color-ther);">Session Capture</span>
       <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">Capture any way you work</h2>
-      <p style="font-size:16px;color:var(--color-text-muted);max-width:640px;margin-inline:auto;margin-top:12px;line-height:1.7;">Four entry methods, one review pipeline &mdash; every path converges on the same 13-field structured clinical analysis.</p>
+      <p style="font-size:16px;color:var(--color-text-muted);max-width:640px;margin-inline:auto;margin-top:12px;line-height:1.7;">The easiest path is automatic &mdash; join the call and TherAssist handles the rest. Every path converges on the same 13-field structured clinical analysis.</p>
     </div>
+
+    <div class="capture-featured fade-up" data-animate>
+      <div class="capture-featured__icon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l5-3v10l-5-3"/><rect x="1" y="6" width="14" height="12" rx="2"/></svg></div>
+      <div class="capture-featured__body">
+        <span class="capture-featured__badge">Primary Method &middot; Easiest Way to Capture</span>
+        <h3 class="capture-featured__title">Meeting Link</h3>
+        <p class="capture-featured__desc">Paste a video-call link and a bot joins, records, and transcribes automatically &mdash; nothing to type, photograph, or remember once the session ends. The transcript comes back encrypted the entire way, and still waits for your review before anything is analyzed.</p>
+        <ul class="capture-featured__list">
+          <li>Zero manual work during or after the session</li>
+          <li>Hybrid-encrypted to your device the entire way through</li>
+          <li>Never auto-analyzed &mdash; still waits for your explicit review, like every other method</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="capture__secondary-label fade-up" data-animate>Also Available</div>
     <div class="capture-grid stagger">
       <div class="capture-card">
         <div class="capture-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
@@ -262,11 +287,6 @@
         <div class="capture-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
         <div class="capture-card__title">Photo of Handwritten Notes</div>
         <p class="capture-card__desc">Photograph paper notes; vision AI transcribes them, flagging anything illegible rather than guessing.</p>
-      </div>
-      <div class="capture-card">
-        <div class="capture-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l5-3v10l-5-3"/><rect x="1" y="6" width="14" height="12" rx="2"/></svg></div>
-        <div class="capture-card__title">Meeting Link</div>
-        <p class="capture-card__desc">Paste a video-call link and a bot joins, records, and transcribes &mdash; encrypted the entire way, never auto-analyzed.</p>
       </div>
     </div>
     <div class="capture__quote fade-up" data-animate>&ldquo;Every entry method converges on the same mandatory review gate. Nothing is ever saved, or analyzed, without the therapist&rsquo;s explicit approval.&rdquo;</div>
