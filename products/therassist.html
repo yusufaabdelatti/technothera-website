@@ -89,9 +89,6 @@
     .tier-card__list{list-style:none;display:flex;flex-direction:column;gap:12px;padding:0;margin:0;}
     .tier-feature{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.65;}
     .tier-feature::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--color-ther);flex-shrink:0;margin-top:7px;}
-    .privacy__exception{margin-top:36px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-left:3px solid #F5A623;border-radius:14px;padding:26px 32px;}
-    .privacy__exception-title{font-family:var(--font-display);font-size:13px;font-weight:800;color:#F5A623;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
-    .privacy__exception p{font-size:14px;line-height:1.75;color:rgba(255,255,255,.7);}
     /* Clinical depth */
     .depth{padding-block:100px;background:#fff;}
     .depth__inner{max-width:1280px;margin-inline:auto;padding-inline:24px;}
@@ -111,11 +108,6 @@
     .bilingual__feature{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;}
     .bilingual__feature::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--color-ther);flex-shrink:0;margin-top:7px;}
     .bilingual__visual{display:flex;justify-content:center;align-items:center;}
-    /* Consent form callout */
-    .consent{padding-block:100px;background:#fff;text-align:center;}
-    .consent__inner{max-width:760px;margin-inline:auto;padding-inline:24px;}
-    .consent__pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:32px;}
-    .consent__pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--color-light);border:1px solid var(--color-border);border-radius:999px;font-family:var(--font-display);font-size:13px;font-weight:600;color:var(--color-navy);}
     /* Plans */
     .plans{padding-block:100px;background:var(--color-light);}
     .plans__inner{max-width:720px;margin-inline:auto;padding-inline:24px;}
@@ -240,7 +232,7 @@
         <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>Capture a session four ways &mdash; AI drafts a full 13-field clinical note in seconds</span></div>
         <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>Review and edit before anything is saved &mdash; nothing silent, nothing auto-analyzed</span></div>
         <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>Every session builds a searchable, filterable personal clinical knowledge base</span></div>
-        <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>A ready-to-use consent form the client signs via a private link &mdash; files itself automatically</span></div>
+        <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>Full-text and semantic search turn years of sessions into an actual clinical knowledge base</span></div>
         <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>Works natively in Arabic and English, generated bilingually from the start</span></div>
         <div class="problem-card__item"><span class="pci pci-ok">&#10003;</span><span>The therapist&rsquo;s own passphrase &mdash; never transmitted, never known to Technothera &mdash; is the only key</span></div>
       </div>
@@ -327,10 +319,6 @@
         </ul>
       </div>
     </div>
-    <div class="privacy__exception fade-up" data-animate>
-      <div class="privacy__exception-title">One Narrow, Disclosed Exception</div>
-      <p>A client-signed consent form (name typed + which items they checked, nothing clinical) briefly touches a server so it can reach a stranger&rsquo;s browser with no login required &mdash; then files itself into the therapist&rsquo;s encrypted record and is deleted server-side immediately. It&rsquo;s the only place in the entire system where anything touches server infrastructure in readable form, and it&rsquo;s a world apart from clinical content, which never does this under any circumstance.</p>
-    </div>
   </div>
 </section>
 
@@ -413,43 +401,27 @@
   </div>
 </section>
 
-<!-- CONSENT FORM -->
-<section class="consent">
-  <div class="consent__inner">
-    <div class="fade-up" data-animate>
-      <span class="eyebrow" style="justify-content:center;color:var(--color-ther);">Client-Facing</span>
-      <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">A consent form that&rsquo;s entirely the therapist&rsquo;s own</h2>
-      <p style="font-size:16px;line-height:1.8;color:var(--color-text-muted);margin-top:16px;">A premium, ready-to-use bilingual consent form explaining AI-assisted note-taking &mdash; carrying no Technothera or TherAssist branding at all. Available as a downloadable PDF, or sent as a one-time, no-login link the client opens themselves to sign, which then files itself into that exact client&rsquo;s profile automatically.</p>
-      <div class="consent__pills">
-        <span class="consent__pill">No Login Required</span>
-        <span class="consent__pill">Auto-Files Into Client Profile</span>
-        <span class="consent__pill">Zero Technothera Branding</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PLANS -->
 <section class="plans">
   <div class="plans__inner">
     <div class="fade-up" data-animate style="text-align:center;margin-bottom:16px;">
       <span class="eyebrow" style="justify-content:center;color:var(--color-ther);">Plans</span>
-      <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">One plan today. Room to grow.</h2>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">One plan. Every feature included.</h2>
     </div>
     <div class="plan-card fade-up" data-animate>
       <div class="plan-card__badge">Individual Practitioner</div>
-      <h3 class="plan-card__title">Built for one therapist&rsquo;s real workflow</h3>
-      <p class="plan-card__desc">Sold as an ongoing plan to individual psychotherapists, billed around usage quotas for the two variable-cost dimensions of the platform.</p>
+      <h3 class="plan-card__title">Every feature, one plan</h3>
+      <p class="plan-card__desc">TherAssist is offered as a single plan &mdash; every clinical and privacy feature is included from day one. What scales with your practice is session volume, not feature access.</p>
       <ul class="plan-card__specs">
-        <li class="plan-spec">Independent usage quotas for AI session-analysis calls and meeting-bot transcription minutes, both settable from Technothera&rsquo;s side</li>
+        <li class="plan-spec">Every capability included &mdash; session capture, case intelligence, formulations, and the full privacy architecture, all of it</li>
+        <li class="plan-spec">Independent usage quotas for AI session-analysis calls and meeting-bot transcription minutes &mdash; this is what scales with your caseload, not features</li>
         <li class="plan-spec">A Technothera-managed OpenAI key included by default &mdash; or supply your own key at any time, as a personal choice</li>
         <li class="plan-spec">AI usage transparency &mdash; a cost hint shown next to every action before you trigger it</li>
-        <li class="plan-spec">Built on an account model that already supports a natural growth path to multi-therapist practices</li>
       </ul>
-      <a href="../contact.html" class="btn-ther">Request a Walkthrough</a>
+      <a href="../contact.html" class="btn-ther">Contact Us for Pricing</a>
     </div>
     <div class="plans__note fade-up" data-animate>
-      TherAssist is sold as an ongoing plan to individual psychotherapists today &mdash; with the underlying multi-tenant account model already built to support a dedicated multi-therapist practice tier as that grows.
+      Pricing is based on expected session volume &mdash; reach out and we&rsquo;ll walk you through the plan that fits your practice.
     </div>
   </div>
 </section>
