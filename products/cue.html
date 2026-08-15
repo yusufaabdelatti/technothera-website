@@ -44,15 +44,17 @@
     .meaning::before{content:'';position:absolute;top:-260px;left:50%;transform:translateX(-50%);width:900px;height:640px;background:radial-gradient(ellipse,rgba(139,92,246,.07) 0%,transparent 65%);pointer-events:none;}
     .meaning__inner{max-width:700px;margin-inline:auto;padding-inline:24px;position:relative;z-index:1;}
     .meaning__icon{width:52px;height:52px;border-radius:14px;background:rgba(139,92,246,.1);display:flex;align-items:center;justify-content:center;margin:22px auto 0;}
-    .meaning__word{font-family:var(--font-display);font-size:clamp(3.5rem,11vw,6.5rem);font-weight:800;letter-spacing:.01em;line-height:1;margin:20px 0 24px;background:linear-gradient(135deg,var(--color-cue) 0%,#5B3FA8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
-    .meaning__sd{display:inline-flex;align-items:center;gap:10px;justify-content:center;font-family:var(--font-display);font-size:12.5px;font-weight:700;margin-bottom:32px;}
-    .meaning__sd-chip{padding:7px 16px;border-radius:999px;border:1px solid var(--color-border);background:var(--color-light);color:var(--color-text-muted);letter-spacing:.02em;}
-    .meaning__sd-chip--cue{border-color:rgba(139,92,246,.35);background:rgba(139,92,246,.1);color:var(--color-cue);}
-    .meaning__sd-arrow{color:var(--color-border);font-size:15px;}
-    .meaning__tagline{font-family:var(--font-display);font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;color:var(--color-navy);letter-spacing:-.01em;margin-bottom:24px;}
+    .meaning__word{font-family:var(--font-display);font-size:clamp(3.5rem,11vw,6.5rem);font-weight:800;letter-spacing:.01em;line-height:1;margin:20px 0 14px;background:linear-gradient(135deg,var(--color-cue) 0%,#5B3FA8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+    .meaning__label{font-family:var(--font-display);font-size:16px;font-weight:600;font-style:italic;color:var(--color-cue);margin-bottom:36px;}
+    .meaning__cluster-caption{display:block;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);opacity:.7;margin-bottom:14px;}
+    .meaning__cluster{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 10px;margin-bottom:40px;}
+    .meaning__term{font-family:var(--font-display);font-size:12.5px;font-weight:600;color:var(--color-text-muted);letter-spacing:.01em;}
+    .meaning__term sup{font-size:9px;}
+    .meaning__dot{color:var(--color-border);font-size:11px;}
+    .meaning__body{font-size:16px;line-height:1.85;color:var(--color-text-muted);max-width:560px;margin-inline:auto;margin-bottom:44px;}
+    .meaning__lockup-cue{display:block;font-family:var(--font-display);font-size:14px;font-weight:800;letter-spacing:.16em;color:var(--color-cue);margin-bottom:10px;}
+    .meaning__tagline{font-family:var(--font-display);font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:800;color:var(--color-navy);letter-spacing:-.01em;}
     .meaning__tagline span{color:var(--color-cue);}
-    .meaning__body{font-size:16px;line-height:1.85;color:var(--color-text-muted);max-width:600px;margin-inline:auto;}
-    .meaning__body strong{color:var(--color-navy);font-weight:700;}
     @media(max-width:640px){.meaning{padding-block:72px 56px;}}
     /* Problem section */
     .problem{padding-block:100px;background:#fff;}
@@ -208,13 +210,26 @@
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-cue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l2-7 4 14 2-7h8"/></svg>
     </div>
     <h2 class="meaning__word">CUE</h2>
-    <div class="meaning__sd">
-      <span class="meaning__sd-chip meaning__sd-chip--cue">Cue</span>
-      <span class="meaning__sd-arrow">&#8594;</span>
-      <span class="meaning__sd-chip">Response</span>
+    <p class="meaning__label">An ABA-inspired concept</p>
+    <span class="meaning__cluster-caption">Inspired by concepts including</span>
+    <div class="meaning__cluster">
+      <span class="meaning__term">S<sup>D</sup></span>
+      <span class="meaning__dot">&middot;</span>
+      <span class="meaning__term">Instruction</span>
+      <span class="meaning__dot">&middot;</span>
+      <span class="meaning__term">Prompt</span>
+      <span class="meaning__dot">&middot;</span>
+      <span class="meaning__term">Stimulus Prompt</span>
+      <span class="meaning__dot">&middot;</span>
+      <span class="meaning__term">Model</span>
+      <span class="meaning__dot">&middot;</span>
+      <span class="meaning__term">Gestural Cue</span>
     </div>
-    <p class="meaning__tagline"><span>C</span>ollect. <span>U</span>nderstand. <span>E</span>volve.</p>
-    <p class="meaning__body">CUE is inspired by the cue at the heart of every ABA teaching interaction &mdash; the signal that creates an opportunity for a learner to respond. CUE also represents our approach: <strong>Collect</strong> meaningful data, <strong>Understand</strong> what it tells us, and <strong>Evolve</strong> therapy based on progress.</p>
+    <p class="meaning__body">CUE is our term for the signals and teaching elements that guide a learner toward a response.</p>
+    <div class="meaning__lockup">
+      <span class="meaning__lockup-cue">CUE</span>
+      <p class="meaning__tagline"><span>C</span>ollect. <span>U</span>nderstand. <span>E</span>volve.</p>
+    </div>
   </div>
 </section>
 
