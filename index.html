@@ -513,22 +513,26 @@
   var nav = document.getElementById('main-nav');
   var links = nav.querySelectorAll('.nav__link');
   var toggleSpans = nav.querySelectorAll('.nav__toggle span');
+  var scrolled = null;
+  var ticking = false;
   function applyScroll(){
+    ticking = false;
     var down = window.scrollY > 60;
+    if(down === scrolled) return;
+    scrolled = down;
     nav.style.background = down ? 'rgba(255,255,255,.97)' : 'transparent';
     nav.style.borderBottomColor = down ? 'rgba(221,226,234,.5)' : 'rgba(255,255,255,.06)';
     nav.style.boxShadow = down ? '0 4px 12px rgba(11,19,32,.10)' : 'none';
     links.forEach(function(l){ l.style.color = down ? '' : 'rgba(255,255,255,.8)'; });
     toggleSpans.forEach(function(s){ s.style.background = down ? 'var(--color-navy)' : '#fff'; });
-    var logo = nav.querySelector('.nav__logo');
-    if(logo) {
-      logo.querySelectorAll('.logo-techno').forEach(function(s){ s.style.color = down ? 'var(--color-indigo)' : 'var(--color-indigo)'; });
-      logo.querySelectorAll('.logo-thera').forEach(function(s){ s.style.color = down ? 'var(--color-teal)' : 'var(--color-teal)'; });
-    }
-    var cta = nav.querySelector('.btn-indigo');
-    if(cta) cta.style.background = '';
   }
-  window.addEventListener('scroll', applyScroll, {passive:true});
+  function onScroll(){
+    if(!ticking){
+      ticking = true;
+      requestAnimationFrame(applyScroll);
+    }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
   applyScroll();
 
   // Dropdown hover
