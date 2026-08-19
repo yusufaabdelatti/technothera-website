@@ -19,12 +19,14 @@
 !apple-touch-icon.png
 !client-form.html
 !vercel.json
+!arca.html
 
 # Website subdirectories
 !/css/
 !/products/
 !/js/
 !/api/
+!/assets/
 
 # Exclude development prompt and script files wherever they appear
 *.md
