@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TherAssist — Your AI Clinical Assistant</title>
+  <meta name="description" content="TherAssist is a personal, privacy-first clinical intelligence system for solo psychotherapy practice — AI-assisted session capture and analysis, client-facing summaries, and case intelligence, with client data encrypted on-device.">
+  <meta property="og:title" content="TherAssist — Your AI Clinical Assistant">
+  <meta property="og:description" content="AI-assisted clinical work without giving up control of client data. Session capture, AI analysis with a mandatory review gate, and case intelligence for solo psychotherapy practice.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/therassist/therassist-app-icon-512.png">
+  <link rel="icon" href="assets/therassist/therassist-app-icon-512.png">
+  <link rel="apple-touch-icon" href="assets/therassist/therassist-app-icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --primary:#1F4D45;
+      --secondary:#A8C5B5;
+      --accent:#4F8A8B;
+      --bg:#F7F8F6;
+      --surface:#FFFFFF;
+      --text:#1E293B;
+      --text-muted:#64748B;
+      --success:#2E7D32;
+      --danger:#C62828;
+      --border:#E2E8E3;
+      --dark-bg:#0D1412;
+      --dark-surface:#16211E;
+      --dark-primary:#6FB2A3;
+      --dark-accent:#6FA8A9;
+      --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font);color:var(--text);background:var(--surface);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+    ul{list-style:none;}
+    .wrap{max-width:1220px;margin-inline:auto;padding-inline:24px;}
+
+    /* Scroll-reveal utility (mirrors the shared site convention, self-contained) */
+    [data-animate]{transition-property:opacity,transform;transition-duration:600ms;transition-timing-function:var(--ease);}
+    [data-animate].is-visible{opacity:1 !important;transform:none !important;}
+    .fade-up{opacity:0;transform:translateY(32px);}
+    .fade-left{opacity:0;transform:translateX(40px);}
+    .fade-right{opacity:0;transform:translateX(-40px);}
+    .stagger>*{opacity:0;transform:translateY(24px);transition:opacity 600ms var(--ease),transform 600ms var(--ease);}
+    .stagger>*.is-visible{opacity:1;transform:none;}
+    .stagger>*:nth-child(1){transition-delay:0ms;}
+    .stagger>*:nth-child(2){transition-delay:80ms;}
+    .stagger>*:nth-child(3){transition-delay:160ms;}
+    .stagger>*:nth-child(4){transition-delay:240ms;}
+    .stagger>*:nth-child(5){transition-delay:320ms;}
+    .stagger>*:nth-child(6){transition-delay:400ms;}
+    @media (prefers-reduced-motion:reduce){[data-animate],.fade-up,.fade-left,.fade-right,.stagger>*{transition:none !important;opacity:1 !important;transform:none !important;}}
+
+    /* Buttons */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-family:var(--font);font-size:15px;font-weight:600;border:none;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s;}
+    .btn-solid{background:var(--primary);color:#fff;box-shadow:0 8px 26px rgba(31,77,69,.3);}
+    .btn-solid:hover{background:#193f38;transform:translateY(-2px);box-shadow:0 10px 30px rgba(31,77,69,.4);}
+    .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.35);}
+    .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6);}
+    .btn-ghost-dark{background:transparent;color:var(--primary);border:1.5px solid var(--border);}
+    .btn-ghost-dark:hover{background:var(--bg);}
+
+    /* Nav — solid light bar (the mark's line art needs a light background to stay legible) */
+    .nav{position:sticky;top:0;left:0;right:0;z-index:100;height:76px;display:flex;align-items:center;background:rgba(247,248,246,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transition:box-shadow .25s var(--ease);}
+    .nav--scrolled{box-shadow:0 4px 16px rgba(15,23,20,.06);}
+    .nav__inner{width:100%;max-width:1220px;margin-inline:auto;padding-inline:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+    .nav__brand img{height:32px;width:auto;}
+    .nav__actions{display:flex;align-items:center;gap:12px;}
+    .nav__actions .btn{padding:10px 18px;font-size:13.5px;}
+    .nav__actions .btn-ghost-dark{border-color:var(--border);}
+    .nav__toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+    .nav__toggle span{width:22px;height:2px;background:var(--primary);border-radius:2px;transition:transform .2s,opacity .2s;}
+    .nav__toggle--open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav__toggle--open span:nth-child(2){opacity:0;}
+    .nav__toggle--open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav__drawer{position:fixed;top:76px;left:0;right:0;background:var(--surface);z-index:99;padding:20px 24px 28px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--border);transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+    .nav__drawer--open{opacity:1;transform:none;pointer-events:auto;}
+
+    /* Hero */
+    .hero{background:radial-gradient(ellipse at 25% 0%,rgba(111,178,163,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,rgba(111,168,169,.14) 0%,transparent 50%),linear-gradient(160deg,#1F4D45 0%,#123832 45%,var(--dark-bg) 100%);padding-block:88px;text-align:center;position:relative;overflow:hidden;}
+    .hero__inner{position:relative;z-index:1;max-width:780px;margin-inline:auto;padding-inline:24px;}
+    .hero__chip{width:88px;height:88px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 28px;box-shadow:0 12px 32px rgba(0,0,0,.25);padding:14px;}
+    .hero__chip img{width:100%;height:100%;object-fit:contain;}
+    .hero__h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:16px;}
+    .hero__tagline{font-size:clamp(1.05rem,2vw,1.3rem);font-style:italic;font-weight:500;color:var(--dark-primary);margin-bottom:22px;}
+    .hero__body{font-size:16.5px;line-height:1.75;color:rgba(255,255,255,.65);max-width:600px;margin:0 auto 36px;}
+    .hero__ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+    .hero .btn-solid{background:var(--dark-primary);color:var(--dark-bg);box-shadow:0 8px 26px rgba(111,178,163,.35);}
+    .hero .btn-solid:hover{background:#84c2b4;}
+    .hero__pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .pill{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.8);}
+    .pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--dark-primary);}
+
+    /* Section shared */
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
+    .eyebrow::before{content:'';width:20px;height:2px;background:var(--primary);border-radius:2px;}
+    .h2{font-size:clamp(1.65rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.25;color:var(--text);}
+    .section-head{text-align:center;max-width:640px;margin-inline:auto;margin-bottom:52px;}
+
+    /* Brand promise */
+    .promise{padding-block:100px;background:var(--surface);text-align:center;}
+    .promise__body{font-size:clamp(1.3rem,2.6vw,1.9rem);font-weight:700;color:var(--text);line-height:1.4;max-width:720px;margin:0 auto 20px;}
+    .promise__sub{font-size:16.5px;line-height:1.8;color:var(--text-muted);max-width:620px;margin:0 auto;}
+
+    /* Feature grid */
+    .features{padding-block:100px;background:var(--bg);}
+    .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+    .feat-card{background:var(--surface);border-radius:16px;padding:30px 28px;border:1px solid var(--border);transition:box-shadow .2s,transform .2s;}
+    .feat-card:hover{box-shadow:0 12px 30px rgba(31,77,69,.1);transform:translateY(-3px);}
+    .feat-card__icon{width:42px;height:42px;border-radius:11px;background:rgba(31,77,69,.08);display:flex;align-items:center;justify-content:center;margin-bottom:18px;color:var(--primary);}
+    .feat-card__title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px;}
+    .feat-card__desc{font-size:13.5px;line-height:1.7;color:var(--text-muted);}
+
+    /* Product tour */
+    .tour{padding-block:100px;background:var(--surface);}
+    .tour__row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .tour__row+.tour__row{margin-top:100px;}
+    .tour__row--rev .tour__media{order:2;}
+    .tour__row--rev .tour__text{order:1;}
+    .tour__h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;color:var(--text);letter-spacing:-.01em;margin-bottom:16px;line-height:1.3;}
+    .tour__body{font-size:16px;line-height:1.8;color:var(--text-muted);}
+    .frame{border-radius:16px;overflow:hidden;background:var(--bg);box-shadow:0 24px 56px rgba(15,23,20,.14);border:1px solid var(--border);position:relative;max-height:520px;}
+    .frame__bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:#EDEFEC;border-bottom:1px solid var(--border);}
+    .frame__dot{width:9px;height:9px;border-radius:50%;background:rgba(15,23,20,.15);}
+    .frame__scroll{max-height:472px;overflow:hidden;position:relative;}
+    .frame__scroll::after{content:'';position:absolute;left:0;right:0;bottom:0;height:120px;background:linear-gradient(180deg,transparent,var(--bg));}
+    .frame img{width:100%;display:block;}
+
+    /* Privacy */
+    .privacy{padding-block:100px;background:linear-gradient(160deg,#123832 0%,var(--dark-bg) 100%);color:#fff;}
+    .privacy__grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .privacy__eyebrow{color:var(--dark-primary);}
+    .privacy__eyebrow::before{background:var(--dark-primary);}
+    .privacy__h2{font-size:clamp(1.65rem,2.8vw,2.2rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:22px;line-height:1.3;}
+    .privacy__quote{font-size:17px;line-height:1.8;color:rgba(255,255,255,.85);border-left:3px solid var(--dark-primary);padding-left:22px;font-weight:500;margin-bottom:24px;}
+    .privacy__note{font-size:14px;line-height:1.75;color:rgba(255,255,255,.55);}
+    .privacy__frame{border-radius:16px;overflow:hidden;box-shadow:0 24px 56px rgba(0,0,0,.35);max-height:480px;}
+    .privacy__frame .frame__scroll{max-height:432px;}
+
+    /* Final CTA */
+    .final-cta{padding-block:100px;background:var(--primary);text-align:center;}
+    .final-cta__h2{font-size:clamp(1.65rem,3vw,2.4rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:16px;}
+    .final-cta__body{font-size:16px;line-height:1.8;color:rgba(255,255,255,.7);max-width:520px;margin:0 auto 32px;}
+    .final-cta__ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+    /* Footer */
+    footer{background:var(--dark-bg);padding-block:48px;}
+    .ftr__inner{max-width:1220px;margin-inline:auto;padding-inline:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+    .ftr__brand{display:flex;align-items:center;gap:10px;}
+    .ftr__brand-chip{background:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;padding:5px;}
+    .ftr__brand-chip img{width:100%;height:100%;object-fit:contain;}
+    .ftr__brand-text{font-size:13px;color:rgba(255,255,255,.5);}
+    .ftr__brand-text strong{color:#fff;font-weight:700;}
+    .ftr__links{display:flex;gap:24px;font-size:13px;}
+    .ftr__links a{color:rgba(255,255,255,.5);transition:color .15s;}
+    .ftr__links a:hover{color:var(--dark-primary);}
+    .ftr__copy{font-size:12px;color:rgba(255,255,255,.3);}
+
+    @media(max-width:900px){
+      .feat-grid{grid-template-columns:1fr 1fr;}
+      .tour__row,.privacy__grid{grid-template-columns:1fr;gap:32px;}
+      .tour__row--rev .tour__media,.tour__row--rev .tour__text{order:initial;}
+      .nav__actions .btn-ghost-dark{display:none;}
+    }
+    @media(max-width:640px){
+      .feat-grid{grid-template-columns:1fr;}
+      .nav__toggle{display:flex;}
+      .nav__actions{display:none;}
+      .ftr__inner{flex-direction:column;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__brand" aria-label="TherAssist">
+      <img src="assets/therassist/therassist-logo-nav.png" alt="TherAssist">
+    </a>
+    <div class="nav__actions">
+      <a href="mailto:info@technothera.com" class="btn btn-ghost-dark">Contact Us</a>
+      <a href="https://therassist-bcu.pages.dev/activate" class="btn btn-solid">Get Started</a>
+    </div>
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer">
+  <a href="mailto:info@technothera.com" class="btn btn-ghost-dark" style="justify-content:center;">Contact Us</a>
+  <a href="https://therassist-bcu.pages.dev/activate" class="btn btn-solid" style="justify-content:center;">Get Started</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__chip fade-up" data-animate>
+      <img src="assets/therassist/therassist-mark.png" alt="TherAssist mark">
+    </div>
+    <div data-animate class="fade-up">
+      <h1 class="hero__h1">TherAssist</h1>
+      <p class="hero__tagline">Your AI Clinical Assistant</p>
+      <p class="hero__body">A personal, privacy-first clinical intelligence system for solo psychotherapy practice &mdash; session capture, AI-assisted analysis, and caseload management, built around a strict architecture where client data stays encrypted on your device.</p>
+      <div class="hero__ctas">
+        <a href="https://therassist-bcu.pages.dev/activate" class="btn btn-solid">Get Started</a>
+        <a href="mailto:info@technothera.com" class="btn btn-ghost">Contact Us</a>
+      </div>
+      <div class="hero__pills">
+        <span class="pill">Offline-First &amp; Local</span>
+        <span class="pill">Encrypted On-Device</span>
+        <span class="pill">Consent-Gated AI</span>
+        <span class="pill">Bilingual AI Output</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND PROMISE -->
+<section class="promise">
+  <div class="wrap">
+    <div class="fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">The Promise</span>
+    </div>
+    <p class="promise__body fade-up" data-animate>AI-assisted clinical work without giving up control of client data.</p>
+    <p class="promise__sub fade-up" data-animate>Not &ldquo;AI that reads your notes&rdquo; &mdash; AI that only ever sees what you explicitly hand it, for the clients who explicitly agreed to it.</p>
+  </div>
+</section>
+
+<!-- WHAT THERASSIST DOES -->
+<section class="features">
+  <div class="wrap">
+    <div class="section-head fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">What TherAssist Does</span>
+      <h2 class="h2">A clinical assistant built around review, not automation.</h2>
+    </div>
+    <div class="feat-grid stagger">
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+        <div class="feat-card__title">AI Scribe Session Capture</div>
+        <p class="feat-card__desc">Paste a meeting link and the AI Scribe joins and transcribes for you &mdash; or capture via pasted transcript, typed notes, or a photo of handwritten notes. Nothing is analyzed automatically, and no audio or video is ever stored.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div class="feat-card__title">AI Session Analysis, Reviewed by You</div>
+        <p class="feat-card__desc">A structured draft &mdash; summary, themes, interventions, risk flags, and a suggested focus for next time &mdash; generated per session, always reviewed and approved by you before it's saved.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="feat-card__title">Client-Facing Summaries</div>
+        <p class="feat-card__desc">A separate, client-safe summary generated from your approved analysis, editable before sharing, with copy, share, email, export, and translate controls.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <div class="feat-card__title">Case Intelligence</div>
+        <p class="feat-card__desc">An AI-generated rollup across a client's approved sessions &mdash; progress, recurring themes, triggers, protective factors, and breakthroughs &mdash; regenerated as new sessions are added.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div class="feat-card__title">Treatment Plans &amp; Clinical Tools</div>
+        <p class="feat-card__desc">Formulations, assessments, a Next Session Planner, a Homework Ideas bank, and a Support Network tab &mdash; structured clinical tooling alongside the AI.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="feat-card__title">Find Similar Cases</div>
+        <p class="feat-card__desc">Semantic search across your caseload from within a client's profile, surfacing comparable cases in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT TOUR -->
+<section class="tour">
+  <div class="wrap">
+    <div class="section-head fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">See It In Action</span>
+      <h2 class="h2">Real screens. Real workflow.</h2>
+    </div>
+
+    <div class="tour__row">
+      <div class="tour__text fade-right" data-animate>
+        <h3 class="tour__h2">From transcript to a reviewed clinical record.</h3>
+        <p class="tour__body">Session summary, presenting issues, goals, interventions, cognitive and behavioural themes, risk flags, and a client-facing summary &mdash; all generated together, all editable, and never saved until you approve them.</p>
+      </div>
+      <div class="tour__media fade-left" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <div class="frame__scroll">
+            <img src="assets/therassist/screenshots/06-session-detail-crop.png" alt="TherAssist session detail showing full AI session analysis" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tour__row tour__row--rev">
+      <div class="tour__text fade-left" data-animate>
+        <h3 class="tour__h2">Capture a session however it actually happened.</h3>
+        <p class="tour__body">Let the AI Scribe join a live online session by pasting the meeting link, or bring in a pasted transcript, typed digital notes, or a photo of handwritten notes &mdash; your choice, every time.</p>
+      </div>
+      <div class="tour__media fade-right" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <img src="assets/therassist/screenshots/05-new-session-ai-scribe.png" alt="TherAssist New Session form with AI Scribe, Paste Transcript, Digital Notes, and Photo of Notes options" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+
+    <div class="tour__row">
+      <div class="tour__text fade-right" data-animate>
+        <h3 class="tour__h2">A clear read on your caseload.</h3>
+        <p class="tour__body">Active clients, recent sessions, and archived cases at a glance, with quick actions for starting a new client or session right from the dashboard.</p>
+      </div>
+      <div class="tour__media fade-left" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <img src="assets/therassist/screenshots/02-dashboard.png" alt="TherAssist dashboard showing active clients, recent sessions, and quick actions" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="privacy">
+  <div class="wrap">
+    <div class="privacy__grid">
+      <div class="fade-right" data-animate>
+        <span class="eyebrow privacy__eyebrow">Confidentiality, Privacy &amp; Security</span>
+        <h2 class="privacy__h2">Private by architecture, not by policy.</h2>
+        <p class="privacy__quote">Client identity and clinical content are encrypted on your device before anything leaves it, using a key derived from a passphrase only you know. TherAssist's servers &mdash; including the person operating this deployment &mdash; never have access to that key and cannot read client data, in plaintext or otherwise, at any point. AI processing only happens for clients you've explicitly marked as consenting to it, and only the transcript text you paste in is ever sent anywhere.</p>
+        <p class="privacy__note">Multi-therapist deployments are fully isolated &mdash; an administrator can manage accounts and quotas, but can't read your clients' data, session content, or AI output, and never learns your passphrase.</p>
+      </div>
+      <div class="fade-left" data-animate>
+        <div class="frame privacy__frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <div class="frame__scroll">
+            <img src="assets/therassist/screenshots/08-privacy-crop.png" alt="TherAssist in-app Confidentiality, Privacy and Security page" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="final-cta__h2 fade-up" data-animate>Your AI Clinical Assistant.</h2>
+    <p class="final-cta__body fade-up" data-animate>Session capture, AI-assisted analysis, and case intelligence &mdash; with client data that stays yours, by design.</p>
+    <div class="final-cta__ctas fade-up" data-animate>
+      <a href="https://therassist-bcu.pages.dev/activate" class="btn btn-solid" style="background:#fff;color:var(--primary);box-shadow:0 8px 26px rgba(0,0,0,.15);">Get Started</a>
+      <a href="mailto:info@technothera.com" class="btn btn-ghost">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftr__inner">
+    <div class="ftr__brand">
+      <div class="ftr__brand-chip"><img src="assets/therassist/therassist-mark.png" alt=""></div>
+      <span class="ftr__brand-text"><strong>TherAssist</strong> by Technothera</span>
+    </div>
+    <div class="ftr__links">
+      <a href="https://technothera.com">technothera.com</a>
+      <a href="mailto:info@technothera.com">info@technothera.com</a>
+    </div>
+    <p class="ftr__copy">&copy; 2026 Technothera. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
