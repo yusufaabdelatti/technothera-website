@@ -50,6 +50,17 @@
     .pci{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;font-weight:700;}
     .pci-x{background:rgba(232,93,117,.2);color:#E85D75;}
     .pci-ok{background:rgba(74,173,160,.15);color:var(--color-teal);}
+    /* Pricing */
+    .price-table{max-width:820px;margin-inline:auto;border:1px solid var(--color-border);border-radius:16px;overflow:hidden;}
+    .price-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 28px;background:#fff;}
+    .price-row+.price-row{border-top:1px solid var(--color-border);}
+    .price-row__left{display:flex;flex-direction:column;gap:3px;}
+    .price-row__name{font-family:var(--font-display);font-size:15.5px;font-weight:700;color:var(--color-navy);}
+    .price-row__cap{font-size:13px;color:var(--color-text-muted);}
+    .price-row__pricing{display:flex;flex-direction:column;align-items:flex-end;gap:2px;}
+    .price-row__amt{font-family:var(--font-display);font-size:16px;font-weight:800;color:var(--color-teal);white-space:nowrap;}
+    .price-row__was{font-size:11.5px;color:var(--color-text-muted);white-space:nowrap;}
+    @media(max-width:640px){.price-row{flex-direction:column;align-items:flex-start;gap:10px;}.price-row__pricing{align-items:flex-start;}}
     .steps{padding-block:100px;background:var(--color-light);}
     .steps__inner{max-width:1280px;margin-inline:auto;padding-inline:24px;}
     .steps__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:48px;}
@@ -532,6 +543,52 @@
       <div class="stat-val"><span data-count="100" data-suffix="%" data-duration="1.0">100%</span></div>
       <div class="stat-lbl">Digital, zero verbal coordination</div>
     </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="padding-block:100px;background:#fff;">
+  <div class="problem__inner">
+    <div class="fade-up" data-animate style="text-align:center;margin-bottom:24px;">
+      <span class="eyebrow" style="justify-content:center;">Pricing</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">Simple, per-nursery pricing.</h2>
+    </div>
+    <div class="fade-up" data-animate style="max-width:680px;margin-inline:auto;text-align:center;background:rgba(74,173,160,.08);border:1px solid rgba(74,173,160,.25);border-radius:12px;padding:14px 24px;margin-bottom:40px;font-size:13.5px;line-height:1.6;color:var(--color-navy);">
+      <strong>Founding Partner pricing</strong> is available now, before Smart Dismissal System moves to standard pricing &mdash; spots are limited.
+    </div>
+    <div class="price-table fade-up" data-animate>
+      <div class="price-row">
+        <div class="price-row__left">
+          <span class="price-row__name">Starter</span>
+          <span class="price-row__cap">Up to 50 children</span>
+        </div>
+        <div class="price-row__pricing">
+          <span class="price-row__amt">12,000 EGP/yr</span>
+          <span class="price-row__was">18,000 EGP/yr standard price</span>
+        </div>
+      </div>
+      <div class="price-row">
+        <div class="price-row__left">
+          <span class="price-row__name">Growth</span>
+          <span class="price-row__cap">51&ndash;150 children</span>
+        </div>
+        <div class="price-row__pricing">
+          <span class="price-row__amt">20,000 EGP/yr</span>
+          <span class="price-row__was">30,000 EGP/yr standard price</span>
+        </div>
+      </div>
+      <div class="price-row">
+        <div class="price-row__left">
+          <span class="price-row__name">Scale</span>
+          <span class="price-row__cap">150+ children</span>
+        </div>
+        <div class="price-row__pricing">
+          <span class="price-row__amt">32,000 EGP/yr</span>
+          <span class="price-row__was">48,000 EGP/yr standard price</span>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--color-text-muted);margin-top:20px;">Founding pricing is limited to a small number of nurseries. <a href="../contact.html" style="color:var(--color-teal);font-weight:600;">Get in touch</a> to check availability.</p>
   </div>
 </section>
 
