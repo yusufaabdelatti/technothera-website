@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitive Suite by Technothera — Where Psychology Meets Technology</title>
+  <meta name="description" content="Cognitive Suite is an offline-first cognitive training and assessment platform — six structured training modules and a formal assessment battery, built for clinicians to run structured cognitive work and track progress over time.">
+  <meta property="og:title" content="Cognitive Suite by Technothera">
+  <meta property="og:description" content="Six structured modules, one scoring system, one progress record per patient. Offline-first cognitive training and assessment for clinicians.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/cognitive-suite/cognitive-suite-app-icon-512.png">
+  <link rel="icon" href="assets/cognitive-suite/cognitive-suite-app-icon-512.png">
+  <link rel="apple-touch-icon" href="assets/cognitive-suite/cognitive-suite-app-icon-512.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --primary:#6C6EF5;
+      --primary-dark:#5557D9;
+      --primary-light:#9B9DF9;
+      --primary-pale:#EEEFFE;
+      --teal:#2DD4BF;
+      --navy:#0D1117;
+      --bg:#F5F7FA;
+      --surface:#FFFFFF;
+      --border:#E2E8F0;
+      --text:#0F172A;
+      --text-muted:#64748B;
+      --text-faint:#94A3B8;
+      --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --mono:'JetBrains Mono',ui-monospace,monospace;
+      --ease:cubic-bezier(0.16,1,0.3,1);
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font);color:var(--text);background:var(--surface);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    img{max-width:100%;display:block;}
+    ul{list-style:none;}
+    .wrap{max-width:1220px;margin-inline:auto;padding-inline:24px;}
+
+    [data-animate]{transition-property:opacity,transform;transition-duration:600ms;transition-timing-function:var(--ease);}
+    [data-animate].is-visible{opacity:1 !important;transform:none !important;}
+    .fade-up{opacity:0;transform:translateY(32px);}
+    .fade-left{opacity:0;transform:translateX(40px);}
+    .fade-right{opacity:0;transform:translateX(-40px);}
+    .stagger>*{opacity:0;transform:translateY(24px);transition:opacity 600ms var(--ease),transform 600ms var(--ease);}
+    .stagger>*.is-visible{opacity:1;transform:none;}
+    .stagger>*:nth-child(1){transition-delay:0ms;}
+    .stagger>*:nth-child(2){transition-delay:60ms;}
+    .stagger>*:nth-child(3){transition-delay:120ms;}
+    .stagger>*:nth-child(4){transition-delay:180ms;}
+    .stagger>*:nth-child(5){transition-delay:240ms;}
+    .stagger>*:nth-child(6){transition-delay:300ms;}
+    @media (prefers-reduced-motion:reduce){[data-animate],.fade-up,.fade-left,.fade-right,.stagger>*{transition:none !important;opacity:1 !important;transform:none !important;}}
+
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-family:var(--font);font-size:15px;font-weight:600;border:none;cursor:pointer;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s;}
+    .btn-solid{background:var(--primary);color:#fff;box-shadow:0 8px 24px rgba(108,110,245,.32);}
+    .btn-solid:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 10px 28px rgba(108,110,245,.4);}
+    .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.3);}
+    .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.55);}
+    .btn-ghost-dark{background:transparent;color:var(--text);border:1.5px solid var(--border);}
+    .btn-ghost-dark:hover{background:var(--bg);}
+
+    .nav{position:sticky;top:0;left:0;right:0;z-index:100;height:76px;display:flex;align-items:center;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--border);transition:box-shadow .25s var(--ease);}
+    .nav--scrolled{box-shadow:0 4px 16px rgba(15,23,42,.06);}
+    .nav__inner{width:100%;max-width:1220px;margin-inline:auto;padding-inline:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+    .nav__brand{display:flex;align-items:center;gap:10px;}
+    .nav__brand img{width:30px;height:30px;}
+    .nav__brand-text{display:flex;flex-direction:column;line-height:1.1;}
+    .nav__brand-name{font-size:15px;font-weight:700;color:var(--text);}
+    .nav__brand-sub{font-size:10px;color:var(--text-faint);font-weight:500;}
+    .nav__actions{display:flex;align-items:center;gap:12px;}
+    .nav__actions .btn{padding:10px 18px;font-size:13.5px;}
+    .nav__toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+    .nav__toggle span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s;}
+    .nav__toggle--open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav__toggle--open span:nth-child(2){opacity:0;}
+    .nav__toggle--open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .nav__drawer{position:fixed;top:76px;left:0;right:0;background:var(--surface);z-index:99;padding:20px 24px 28px;display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--border);transform:translateY(-12px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+    .nav__drawer--open{opacity:1;transform:none;pointer-events:auto;}
+
+    .hero{background:radial-gradient(ellipse at 22% 0%,rgba(108,110,245,.28) 0%,transparent 55%),radial-gradient(ellipse at 82% 30%,rgba(45,212,191,.16) 0%,transparent 50%),linear-gradient(160deg,var(--navy) 0%,#161B26 100%);padding-block:88px;text-align:center;position:relative;overflow:hidden;}
+    .hero__inner{position:relative;z-index:1;max-width:800px;margin-inline:auto;padding-inline:24px;}
+    .hero__mark{width:92px;height:92px;margin:0 auto 26px;}
+    .hero__eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:18px;}
+    .hero__h1{font-size:clamp(2.3rem,5.5vw,3.75rem);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.1;margin-bottom:16px;}
+    .hero__tagline{font-size:clamp(1.05rem,2vw,1.3rem);font-weight:500;color:var(--primary-light);margin-bottom:22px;}
+    .hero__body{font-size:16.5px;line-height:1.75;color:rgba(255,255,255,.62);max-width:620px;margin:0 auto 36px;}
+    .hero__ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:40px;}
+    .hero .btn-solid{background:linear-gradient(135deg,var(--primary) 0%,var(--teal) 100%);}
+    .hero__pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+    .pill{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:999px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.8);}
+    .pill::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);}
+
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px;}
+    .eyebrow::before{content:'';width:20px;height:2px;background:var(--primary);border-radius:2px;}
+    .h2{font-size:clamp(1.65rem,3vw,2.4rem);font-weight:700;letter-spacing:-.02em;line-height:1.25;color:var(--text);}
+    .section-head{text-align:center;max-width:640px;margin-inline:auto;margin-bottom:52px;}
+
+    /* Gate line */
+    .gateline{padding-block:64px;background:var(--surface);text-align:center;border-bottom:1px solid var(--border);}
+    .gateline__text{font-family:var(--mono);font-size:14px;color:var(--text-muted);letter-spacing:.01em;}
+    .gateline__text strong{color:var(--text);font-weight:700;}
+    .gateline__text span{color:var(--primary);}
+
+    /* Modules */
+    .modules{padding-block:100px;background:var(--bg);}
+    .mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .mod-card{background:var(--surface);border-radius:14px;padding:26px 24px;border:1px solid var(--border);transition:box-shadow .2s,transform .2s,border-color .2s;}
+    .mod-card:hover{box-shadow:0 12px 28px rgba(108,110,245,.1);transform:translateY(-3px);border-color:var(--primary-light);}
+    .mod-card__icon{width:40px;height:40px;border-radius:10px;background:var(--primary-pale);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--primary);}
+    .mod-card__title{font-size:15.5px;font-weight:700;color:var(--text);margin-bottom:8px;}
+    .mod-card__desc{font-size:13px;line-height:1.65;color:var(--text-muted);}
+
+    /* Tour */
+    .tour{padding-block:100px;background:var(--surface);}
+    .tour__row{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+    .tour__row+.tour__row{margin-top:100px;}
+    .tour__row--rev .tour__media{order:2;}
+    .tour__row--rev .tour__text{order:1;}
+    .tour__h2{font-size:clamp(1.4rem,2.4vw,1.85rem);font-weight:700;color:var(--text);letter-spacing:-.01em;margin-bottom:16px;line-height:1.3;}
+    .tour__body{font-size:16px;line-height:1.8;color:var(--text-muted);}
+    .frame{border-radius:14px;overflow:hidden;background:var(--bg);box-shadow:0 24px 56px rgba(15,23,42,.14);border:1px solid var(--border);}
+    .frame__bar{display:flex;align-items:center;gap:6px;padding:12px 16px;background:var(--navy);}
+    .frame__dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18);}
+    .frame img{width:100%;display:block;}
+
+    /* Editions */
+    .editions{padding-block:100px;background:var(--bg);}
+    .ed-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+    .ed-card{background:var(--surface);border-radius:16px;padding:36px;border:1.5px solid var(--border);}
+    .ed-badge{display:inline-flex;padding:5px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px;background:var(--primary-pale);color:var(--primary);}
+    .ed-card__title{font-size:19px;font-weight:700;color:var(--text);margin-bottom:10px;}
+    .ed-card__desc{font-size:14px;line-height:1.75;color:var(--text-muted);}
+
+    /* Access CTA (replaces pricing — no plan catalog exists) */
+    .access{padding-block:90px;background:var(--navy);text-align:center;}
+    .access__eyebrow{color:var(--primary-light);}
+    .access__eyebrow::before{background:var(--primary-light);}
+    .access__h2{font-size:clamp(1.65rem,3vw,2.2rem);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:16px;}
+    .access__body{font-size:15.5px;line-height:1.8;color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 32px;}
+
+    footer{background:var(--navy);padding-block:48px;border-top:1px solid rgba(255,255,255,.06);}
+    .ftr__inner{max-width:1220px;margin-inline:auto;padding-inline:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+    .ftr__brand{display:flex;align-items:center;gap:10px;}
+    .ftr__brand img{width:26px;height:26px;}
+    .ftr__brand-text{font-size:13px;color:rgba(255,255,255,.5);}
+    .ftr__brand-text strong{color:#fff;font-weight:700;}
+    .ftr__links{display:flex;gap:24px;font-size:13px;}
+    .ftr__links a{color:rgba(255,255,255,.5);transition:color .15s;}
+    .ftr__links a:hover{color:var(--primary-light);}
+    .ftr__copy{font-size:12px;color:rgba(255,255,255,.3);}
+
+    @media(max-width:900px){
+      .mod-grid{grid-template-columns:1fr 1fr;}
+      .tour__row,.ed-grid{grid-template-columns:1fr;gap:32px;}
+      .tour__row--rev .tour__media,.tour__row--rev .tour__text{order:initial;}
+      .nav__actions .btn-ghost-dark{display:none;}
+    }
+    @media(max-width:640px){
+      .mod-grid{grid-template-columns:1fr;}
+      .nav__toggle{display:flex;}
+      .nav__actions{display:none;}
+      .ftr__inner{flex-direction:column;text-align:center;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a href="#" class="nav__brand" aria-label="Cognitive Suite">
+      <img src="assets/cognitive-suite/cognitive-suite-mark.png" alt="">
+      <div class="nav__brand-text">
+        <span class="nav__brand-name">Cognitive Suite</span>
+        <span class="nav__brand-sub">by Technothera</span>
+      </div>
+    </a>
+    <div class="nav__actions">
+      <a href="mailto:info@technothera.com" class="btn btn-ghost-dark">Contact Us</a>
+      <a href="https://cognitive-suite-pwa.pages.dev/" class="btn btn-solid">Launch Cognitive Suite</a>
+    </div>
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer">
+  <a href="mailto:info@technothera.com" class="btn btn-ghost-dark" style="justify-content:center;">Contact Us</a>
+  <a href="https://cognitive-suite-pwa.pages.dev/" class="btn btn-solid" style="justify-content:center;">Launch Cognitive Suite</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__inner">
+    <img class="hero__mark fade-up" data-animate src="assets/cognitive-suite/cognitive-suite-mark.png" alt="Cognitive Suite mark">
+    <div data-animate class="fade-up">
+      <span class="hero__eyebrow">by Technothera</span>
+      <h1 class="hero__h1">Cognitive Suite</h1>
+      <p class="hero__tagline">Where Psychology Meets Technology.</p>
+      <p class="hero__body">An offline-first cognitive training and assessment platform &mdash; six structured modules and a formal assessment battery, built for clinicians to run structured cognitive work with children and adults and track progress over time.</p>
+      <div class="hero__ctas">
+        <a href="https://cognitive-suite-pwa.pages.dev/" class="btn btn-solid">Launch Cognitive Suite</a>
+        <a href="mailto:info@technothera.com" class="btn btn-ghost">Download for Windows</a>
+      </div>
+      <div class="hero__pills">
+        <span class="pill">Six Training Modules</span>
+        <span class="pill">Basic &middot; Advanced &middot; Comprehensive Assessment</span>
+        <span class="pill">Offline-First</span>
+        <span class="pill">Web &amp; Windows Desktop</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GATE LINE -->
+<section class="gateline">
+  <p class="gateline__text fade-up" data-animate><strong>Cognitive Suite</strong> &mdash; Powered by Technothera &mdash; <span>Where Psychology Meets Technology.</span></p>
+</section>
+
+<!-- MODULES -->
+<section class="modules">
+  <div class="wrap">
+    <div class="section-head fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">Six Structured Modules</span>
+      <h2 class="h2">One scoring system, one progress record per patient.</h2>
+    </div>
+    <div class="mod-grid stagger">
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <div class="mod-card__title">Attention &amp; Concentration</div>
+        <p class="mod-card__desc">Number-grid sequencing from 3&times;3 to 6&times;6 &mdash; tap numbers in ascending order, scored on speed and accuracy.</p>
+      </div>
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="mod-card__title">Reaction Time</div>
+        <p class="mod-card__desc">Simple RT, Inhibition, and Choice RT modes, measuring raw speed, inhibitory control, and decision speed.</p>
+      </div>
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="mod-card__title">Visual Memory</div>
+        <p class="mod-card__desc">Ten category columns, one highlighted item each &mdash; recall which item was shown per column after exposure.</p>
+      </div>
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div>
+        <div class="mod-card__title">Executive Control</div>
+        <p class="mod-card__desc">Color/shape rule-switching with GO/NO-GO trials across three difficulty levels, measuring flexibility and inhibition.</p>
+      </div>
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
+        <div class="mod-card__title">Spatial Memory</div>
+        <p class="mod-card__desc">Memorize a grid pattern, complete a math distractor, then reconstruct it from memory &mdash; three levels, up to 6&times;6.</p>
+      </div>
+      <div class="mod-card">
+        <div class="mod-card__icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <div class="mod-card__title">Memory Integration</div>
+        <p class="mod-card__desc">Card-matching across five levels up to an 8&times;8 grid, measuring working memory, encoding, and retrieval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT TOUR -->
+<section class="tour">
+  <div class="wrap">
+    <div class="section-head fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">See It In Action</span>
+      <h2 class="h2">Real screens. Real clinical output.</h2>
+    </div>
+
+    <div class="tour__row">
+      <div class="tour__text fade-right" data-animate>
+        <h3 class="tour__h2">Every module, one dashboard.</h3>
+        <p class="tour__body">Six training modules plus a full Assessment battery and a per-patient Progress view &mdash; the whole clinical toolkit in one screen, ready to launch into.</p>
+      </div>
+      <div class="tour__media fade-left" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <img src="assets/cognitive-suite/screenshots/03-dashboard.png" alt="Cognitive Suite dashboard showing all six training modules plus Assessment and My Progress" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+
+    <div class="tour__row tour__row--rev">
+      <div class="tour__text fade-left" data-animate>
+        <h3 class="tour__h2">Clinical-grade scoring, every session.</h3>
+        <p class="tour__body">Overall score, completion time, errors, and a speed/accuracy breakdown after every session &mdash; with a one-tap Clinical PDF export, generated entirely on-device.</p>
+      </div>
+      <div class="tour__media fade-right" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <img src="assets/cognitive-suite/screenshots/06-session-results.png" alt="Cognitive Suite session results showing overall score, time, errors, and speed/accuracy breakdown" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+
+    <div class="tour__row">
+      <div class="tour__text fade-right" data-animate>
+        <h3 class="tour__h2">Progress that's tracked automatically.</h3>
+        <p class="tour__body">Per-module and overall progress charts, full session history, and one-click PDF export for the complete progress record &mdash; no manual charting required.</p>
+      </div>
+      <div class="tour__media fade-left" data-animate>
+        <div class="frame">
+          <div class="frame__bar"><span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span></div>
+          <img src="assets/cognitive-suite/screenshots/07-progress-charts.png" alt="Cognitive Suite My Progress page with clinical view charts, trend lines, and session history" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDITIONS -->
+<section class="editions">
+  <div class="wrap">
+    <div class="section-head fade-up" data-animate>
+      <span class="eyebrow" style="justify-content:center;">Platforms</span>
+      <h2 class="h2">Web app. Windows desktop. Same clinical engine.</h2>
+    </div>
+    <div class="ed-grid stagger">
+      <div class="ed-card">
+        <span class="ed-badge">Web App</span>
+        <h3 class="ed-card__title">Install Anywhere</h3>
+        <p class="ed-card__desc">A Progressive Web App that installs to the home screen on tablets, phones, and desktop browsers &mdash; works fully offline after first license validation.</p>
+      </div>
+      <div class="ed-card">
+        <span class="ed-badge">Windows Desktop</span>
+        <h3 class="ed-card__title">Native Clinic Install</h3>
+        <p class="ed-card__desc">A native Windows application for clinic desktop and kiosk setups &mdash; same modules, same scoring, same license backend as the web app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access">
+  <div class="wrap">
+    <span class="eyebrow access__eyebrow" style="justify-content:center;">Access</span>
+    <h2 class="access__h2">Licensed per clinic, not sold off a shelf.</h2>
+    <p class="access__body">Cognitive Suite is issued directly to clinics and practitioners &mdash; reach out and we'll set up access for your caseload.</p>
+    <a href="mailto:info@technothera.com" class="btn btn-solid" style="background:linear-gradient(135deg,var(--primary) 0%,var(--teal) 100%);">Contact Us for a License</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftr__inner">
+    <div class="ftr__brand">
+      <img src="assets/cognitive-suite/cognitive-suite-mark.png" alt="">
+      <span class="ftr__brand-text"><strong>Cognitive Suite</strong> by Technothera</span>
+    </div>
+    <div class="ftr__links">
+      <a href="https://technothera.com">technothera.com</a>
+      <a href="mailto:info@technothera.com">info@technothera.com</a>
+    </div>
+    <p class="ftr__copy">&copy; 2026 Technothera. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
