@@ -21,7 +21,6 @@
     .hero__neural-bg{position:absolute;inset:0;pointer-events:none;opacity:.04;}
     .hero__inner{max-width:1280px;margin-inline:auto;padding-inline:24px;padding-block:80px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;}
     .hero__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-teal);margin-bottom:20px;}
-    .hero__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-teal);border-radius:2px;}
     .hero__title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:800;line-height:1.06;letter-spacing:-.03em;color:#fff;margin-bottom:24px;}
     .hero__body{font-size:18px;line-height:1.75;color:rgba(255,255,255,.65);max-width:490px;margin-bottom:36px;}
     .hero__ctas{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
@@ -60,7 +59,6 @@
     .philo{background:var(--color-light);padding-block:100px;}
     .philo__inner{max-width:800px;margin-inline:auto;padding-inline:24px;text-align:center;}
     .philo__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-indigo);margin-bottom:20px;}
-    .philo__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-indigo);border-radius:2px;}
     .philo__h2{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-bottom:20px;line-height:1.25;}
     .philo__body{font-size:17px;line-height:1.85;color:var(--color-text-muted);}
 
@@ -68,7 +66,6 @@
     .products{padding-block:100px;background:#fff;}
     .products__hdr{text-align:center;margin-bottom:20px;padding-inline:24px;}
     .products__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-indigo);margin-bottom:16px;}
-    .products__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-indigo);border-radius:2px;}
     .products__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-bottom:10px;}
     .products__sub{font-size:17px;color:var(--color-text-muted);max-width:560px;margin-inline:auto;line-height:1.65;}
     .products-grid{max-width:1280px;margin-inline:auto;padding-inline:24px;margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);gap:24px;align-items:stretch;}
@@ -83,10 +80,13 @@
     .pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--color-indigo);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;border-radius:0 2px 2px 0;}
     .pc:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(11,19,32,.12);border-color:transparent;}
     .pc:hover::before{transform:scaleY(1);}
-    .pc:hover .pc__more{opacity:1;transform:translateX(0);}
+    .pc__actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+    .pc__full-btn{font-family:var(--font-display);font-size:12.5px;font-weight:700;color:#fff;background:var(--color-indigo);padding:8px 14px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:background .15s,transform .15s;}
+    .pc__full-btn:hover{background:var(--color-indigo-dim);transform:translateY(-1px);}
     .pc--flagship{background:var(--color-light);border-color:rgba(99,102,241,.20);}
     .pc--flagship:hover{box-shadow:0 8px 32px rgba(11,19,32,.13);}
     .pc__pill{display:inline-flex;align-items:center;padding:5px 12px;border-radius:999px;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:.04em;margin-bottom:20px;width:fit-content;}
+    .pc__badge-soon{position:absolute;top:20px;right:20px;background:#F59E0B;color:#fff;font-family:var(--font-display);font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;box-shadow:0 2px 10px rgba(245,158,11,.35);}
     .pc__pill--indigo{background:rgba(99,102,241,.12);color:var(--color-indigo);}
     .pc__name{font-family:var(--font-display);font-size:22px;font-weight:800;color:var(--color-navy);line-height:1.2;margin-bottom:14px;}
     .pc--flagship .pc__name{color:var(--color-navy);}
@@ -97,14 +97,14 @@
     .pc__stat{font-family:var(--font-display);font-size:10px;font-weight:700;color:var(--color-navy);background:rgba(11,19,32,.06);padding:4px 10px;border-radius:6px;}
     
     .pc__idea{font-size:13px;font-style:italic;color:var(--color-indigo);margin-bottom:8px;line-height:1.5;font-weight:600;}
-    .pc__more{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--color-indigo);display:inline-flex;align-items:center;gap:6px;opacity:0;transform:translateX(-8px);transition:opacity .2s,transform .2s;}
+    .pc__more{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--color-indigo);display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:gap .2s;}
+    .pc__more:hover{gap:9px;}
     
 
     /* ── Custom Solutions ── */
     .custom{background:var(--color-navy-soft);padding-block:100px;}
     .custom__inner{max-width:1280px;margin-inline:auto;padding-inline:24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
     .custom__eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--color-teal);margin-bottom:16px;}
-    .custom__eyebrow::before{content:'';display:inline-block;width:20px;height:2px;background:var(--color-teal);border-radius:2px;}
     .custom__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:20px;line-height:1.2;}
     .custom__body{font-size:16px;line-height:1.85;color:rgba(255,255,255,.6);margin-bottom:32px;}
     .custom__svg{display:flex;justify-content:center;align-items:center;}
@@ -213,7 +213,7 @@
             <span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>
             Cognitive Suite
           </a>
-          <a href="arca.html" class="nav-dd-link">
+          <a href="products/arca.html" class="nav-dd-link">
             <span class="nav-dd-icon" style="background:rgba(139,92,246,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>
             ARCA
           </a>
@@ -243,7 +243,7 @@
     <span style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);padding:8px 12px;">Products</span>
     <a href="products/psysights.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">PsySights</a>
     <a href="products/cognitive-suite.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Cognitive Suite</a>
-    <a href="arca.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">ARCA</a>
+    <a href="products/arca.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">ARCA</a>
     <a href="products/therassist.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">TherAssist</a>
     <a href="products/smart-dismissal-system.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Smart Dismissal System</a>
     <a href="about.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">About</a>
@@ -339,7 +339,8 @@
   </div>
   <div class="products-grid">
     <!-- PsySights — flagship -->
-    <a href="products/psysights.html" class="pc pc--flagship pc--pos-a fade-up" data-animate>
+    <div class="pc pc--flagship pc--pos-a fade-up" data-animate>
+      <span class="pc__badge-soon">Coming Soon</span>
       <span class="pc__pill pc__pill--indigo">B2B SaaS &middot; Psychiatric &amp; Psychological Clinics</span>
       <div class="pc__name">PsySights</div>
       <p class="pc__desc">A psychological insights platform that digitizes clinical assessments &mdash; automatic scoring, AI-assisted narratives, and polished clinic-branded reports, in minutes instead of hours.</p>
@@ -349,11 +350,13 @@
         <span class="pc__stat">AI-Assisted Reports</span>
       </div>
       <p class="pc__idea">&ldquo;Better understanding leads to better care.&rdquo;</p>
-      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </a>
+      <div class="pc__actions">
+        <a href="products/psysights.html" class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
 
     <!-- TherAssist -->
-    <a href="products/therassist.html" class="pc pc--pos-b fade-up" data-animate>
+    <div class="pc pc--pos-b fade-up" data-animate>
       <span class="pc__pill pc__pill--blue">Clinical Intelligence Platform &middot; Psychotherapists</span>
       <div class="pc__name">TherAssist</div>
       <p class="pc__desc">A bilingual, local-first clinical intelligence system for psychotherapists &mdash; structured session notes and case intelligence, with zero-knowledge encryption so no one but the treating therapist can ever read a client&rsquo;s clinical content.</p>
@@ -363,11 +366,14 @@
         <span class="pc__stat">4 Ways to Capture a Session</span>
       </div>
       <p class="pc__idea">&ldquo;The only person who can read your notes is you.&rdquo;</p>
-      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </a>
+      <div class="pc__actions">
+        <a href="products/therassist.html" class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="therassist.html" class="pc__full-btn">Full Details</a>
+      </div>
+    </div>
 
     <!-- Cognitive Suite -->
-    <a href="products/cognitive-suite.html" class="pc pc--pos-c fade-up" data-animate>
+    <div class="pc pc--pos-c fade-up" data-animate>
       <span class="pc__pill pc__pill--indigo">Desktop &amp; Tablet &middot; Clinics, Schools &amp; Families</span>
       <div class="pc__name">Cognitive Suite</div>
       <p class="pc__desc">A cognitive training and assessment ecosystem across six clinically-grounded modules &mdash; transforming cognitive testing and training into intelligent, measurable digital experiences.</p>
@@ -377,11 +383,14 @@
         <span class="pc__stat">Clinical-Grade Variables</span>
       </div>
       <p class="pc__idea">&ldquo;Understanding cognition enables human growth.&rdquo;</p>
-      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </a>
+      <div class="pc__actions">
+        <a href="products/cognitive-suite.html" class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="cogsuite.html" class="pc__full-btn">Full Details</a>
+      </div>
+    </div>
 
     <!-- ARCA -->
-    <a href="arca.html" class="pc pc--pos-d fade-up" data-animate>
+    <div class="pc pc--pos-d fade-up" data-animate>
       <span class="pc__pill pc__pill--violet">Offline-First PWA &middot; ABA Therapists &amp; Clinics</span>
       <div class="pc__name">ARCA</div>
       <p class="pc__desc">An offline-first session-delivery app for ABA therapists &mdash; trial-by-trial data collection, behavior tracking, and progress monitoring, all on one screen, all without needing the internet.</p>
@@ -391,11 +400,14 @@
         <span class="pc__stat">Auto Progress Graphs</span>
       </div>
       <p class="pc__idea">&ldquo;Less time on paperwork. More time with the child.&rdquo;</p>
-      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </a>
+      <div class="pc__actions">
+        <a href="products/arca.html" class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="arca.html" class="pc__full-btn">Full Details</a>
+      </div>
+    </div>
 
     <!-- Smart Dismissal System -->
-    <a href="products/smart-dismissal-system.html" class="pc pc--pos-e fade-up" data-animate>
+    <div class="pc pc--pos-e fade-up" data-animate>
       <span class="pc__pill pc__pill--indigo">Operational SaaS &middot; Nurseries &amp; Preschools</span>
       <div class="pc__name">Smart Dismissal System</div>
       <p class="pc__desc">A real-time coordination platform that transforms nursery pickup from reactive chaos into a calm, structured, digital workflow &mdash; born from observing the daily stress of dismissal firsthand.</p>
@@ -405,8 +417,10 @@
         <span class="pc__stat">0 App Downloads Required</span>
       </div>
       <p class="pc__idea">&ldquo;Improving operational systems improves human wellbeing.&rdquo;</p>
-      <span class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </a>
+      <div class="pc__actions">
+        <a href="products/smart-dismissal-system.html" class="pc__more">Learn More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
   </div>
 </section>
 <hr class="section-divider">
@@ -478,7 +492,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;">
         <a href="products/psysights.html" class="ftr-link">PsySights</a>
         <a href="products/cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
-        <a href="arca.html" class="ftr-link">ARCA</a>
+        <a href="products/arca.html" class="ftr-link">ARCA</a>
         <a href="products/therassist.html" class="ftr-link">TherAssist</a>
         <a href="products/smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
       </div>

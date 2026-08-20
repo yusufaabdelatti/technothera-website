@@ -258,15 +258,6 @@ p {
   margin-bottom: var(--space-4);
 }
 
-.eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 24px;
-  height: 2px;
-  background-color: var(--color-teal);
-  border-radius: var(--radius-full);
-}
-
 blockquote {
   border-left: 3px solid var(--color-teal);
   padding: var(--space-4) var(--space-6);

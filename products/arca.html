@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARCA — Technothera</title>
+  <meta name="description" content="ARCA is an offline-first session-delivery app for ABA therapists — trial-by-trial data collection, program and target tracking, behavior tracking, and on-device PDF reporting.">
+  <meta property="og:title" content="ARCA — Technothera">
+  <meta property="og:description" content="Less time on paperwork. More time with the child.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    body{background:#fff;}
+    /* ARCA's own accent — contained to this page only, never touches the global palette */
+    :root{--color-arca:#8B5CF6;--color-arca-dim:#7C3AED;}
+    .btn-arca{background:var(--color-arca);color:#fff;padding:14px 28px;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .2s,transform .1s;box-shadow:0 4px 20px rgba(139,92,246,.35);text-decoration:none;border:none;cursor:pointer;}
+    .btn-arca:hover{background:var(--color-arca-dim);transform:translateY(-1px);}
+    .btn-ghost{background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.35);padding:14px 28px;border-radius:10px;font-family:var(--font-display);font-size:15px;font-weight:600;display:inline-flex;align-items:center;gap:8px;transition:background .2s,border-color .2s;text-decoration:none;}
+    .btn-ghost:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.6);color:#fff;}
+    .ftr-link{font-size:14px;color:rgba(255,255,255,.55);transition:color .15s;}
+    .ftr-link:hover{color:var(--color-teal);}
+    .ftr-link-sm{font-size:12px;color:rgba(255,255,255,.35);transition:color .15s;}
+    .ftr-link-sm:hover{color:var(--color-teal);}
+    .nav-dd-link{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-family:var(--font-display);font-size:14px;font-weight:600;color:var(--color-navy);transition:background .15s;}
+    .nav-dd-link:hover{background:var(--color-light);}
+    .nav-dd-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    /* Hero */
+    .hero{background:linear-gradient(135deg,var(--color-navy) 0%,var(--color-navy-soft) 100%);padding-top:calc(var(--nav-height) + 80px);padding-bottom:80px;position:relative;overflow:hidden;}
+    .hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 72% 22%,rgba(139,92,246,.15) 0%,transparent 58%),radial-gradient(ellipse at 20% 80%,rgba(79,184,168,.05) 0%,transparent 45%);pointer-events:none;z-index:0;}
+    .hero__inner{position:relative;z-index:1;max-width:1280px;margin-inline:auto;padding-inline:24px;text-align:center;}
+    .hero__pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:48px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;font-family:var(--font-display);font-size:13px;font-weight:600;color:rgba(255,255,255,.85);}
+    /* CTA */
+    .page-cta{padding-block:100px;background:var(--color-navy-soft);text-align:center;}
+    .page-cta__inner{max-width:680px;margin-inline:auto;padding-inline:24px;}
+    .page-cta__h2{font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:16px;}
+    .page-cta__body{font-size:16px;line-height:1.8;color:rgba(255,255,255,.65);margin-bottom:32px;}
+    @media(max-width:1024px){.ftr-grid{grid-template-columns:1fr 1fr !important;gap:32px !important;}}
+    @media(max-width:640px){.ftr-grid{grid-template-columns:1fr !important;}}
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <a href="../index.html" class="nav__logo" aria-label="Technothera"><svg class="pulse-icon" viewBox="0 0 200 100" width="40" height="20" aria-hidden="true"><path class="pulse-techno" d="M 10,50 L 26,50 L 26,26 L 42,26 L 42,73 L 58,73 L 58,38" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse-thera" d="M 58,38 C 70,10 83,90 98,50 C 108,26 118,74 130,50 C 138,38 148,62 158,50 C 168,42 178,58 190,50" fill="none" stroke="#4FB8A8" stroke-width="6" stroke-linecap="round"/><circle class="pulse-node" cx="58" cy="38" r="5" fill="#F0F4F8"/></svg><span class="logo-techno">Techno</span><span class="logo-thera">thera</span></a>
+    <div class="nav__links">
+      <div class="nav__dropdown" id="nav-dropdown" style="position:relative;">
+        <a href="#" class="nav__link nav__link--active nav__link--dropdown" aria-haspopup="true" aria-expanded="false" style="display:inline-flex;align-items:center;gap:5px;">
+          Products <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div id="nav-dropdown-menu" style="position:absolute;top:calc(100% + 10px);left:0;min-width:240px;background:#fff;border:1px solid var(--color-border);border-radius:12px;box-shadow:var(--shadow-lg);padding:8px;display:none;z-index:200;">
+          <a href="psysights.html" class="nav-dd-link"><span class="nav-dd-icon" style="background:rgba(99,102,241,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-indigo)" stroke-width="2" stroke-linecap="round"><path d="M9 3H5a2 2 0 0 0-2 2v4"/><path d="M15 3h4a2 2 0 0 1 2 2v4"/><path d="M9 21H5a2 2 0 0 1-2-2v-4"/><path d="M15 21h4a2 2 0 0 0 2-2v-4"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg></span>PsySights</a>
+          <a href="cognitive-suite.html" class="nav-dd-link"><span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span>Cognitive Suite</a>
+          <a href="arca.html" class="nav-dd-link"><span class="nav-dd-icon" style="background:rgba(139,92,246,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H15a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12l2 2 4-4"/></svg></span>ARCA</a>
+          <a href="therassist.html" class="nav-dd-link"><span class="nav-dd-icon" style="background:rgba(37,99,235,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg></span>TherAssist</a>
+          <a href="smart-dismissal-system.html" class="nav-dd-link"><span class="nav-dd-icon" style="background:rgba(79,184,168,.1);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-teal)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span>Smart Dismissal System</a>
+        </div>
+      </div>
+      <a href="../about.html" class="nav__link">About</a>
+      <a href="../contact.html" class="nav__link">Contact</a>
+    </div>
+    <div class="nav__actions"><a href="../contact.html" class="btn-arca" style="padding:10px 20px;font-size:14px;border-radius:8px;box-shadow:none;">Contact Us</a></div>
+    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="nav__drawer" id="nav-drawer">
+  <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;">
+    <span style="font-family:var(--font-display);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-muted);padding:8px 12px;">Products</span>
+    <a href="psysights.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">PsySights</a>
+    <a href="cognitive-suite.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Cognitive Suite</a>
+    <a href="arca.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">ARCA</a>
+    <a href="therassist.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">TherAssist</a>
+    <a href="smart-dismissal-system.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Smart Dismissal System</a>
+    <a href="../about.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">About</a>
+    <a href="../contact.html" class="nav__link" style="width:100%;padding:10px 16px;border-radius:8px;">Contact</a>
+  </div>
+  <a href="../contact.html" class="btn-arca" style="display:flex;justify-content:center;border-radius:8px;">Contact Us</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow" style="justify-content:center;color:var(--color-arca);" data-hero-anim="0">Offline-First PWA &middot; ABA Therapists &amp; Clinics</span>
+    <h1 style="font-family:var(--font-display);font-size:clamp(2.5rem,6vw,5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;color:#fff;margin-top:16px;margin-bottom:20px;" data-hero-anim="120">ARCA</h1>
+    <p style="font-size:clamp(1rem,1.5vw,1.25rem);color:var(--color-arca);font-weight:600;margin-bottom:20px;" data-hero-anim="200">Less time on paperwork. More time with the child.</p>
+    <p style="font-size:17px;line-height:1.75;color:rgba(255,255,255,.65);max-width:680px;margin-inline:auto;margin-bottom:36px;" data-hero-anim="280">ARCA is an offline-first session-delivery app for ABA therapists &mdash; trial-by-trial data collection, behavior tracking, and progress monitoring, all on one screen, all without needing the internet.</p>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;" data-hero-anim="360">
+      <a href="../arca.html" class="btn-arca">View Full Details</a>
+      <a href="../contact.html" class="btn-ghost">Contact Us</a>
+    </div>
+    <div class="hero__pills" data-hero-anim="460">
+      <span class="pill">Fully Offline</span>
+      <span class="pill">Trial-by-Trial Data</span>
+      <span class="pill">Auto Progress Graphs</span>
+      <span class="pill">On-Device PDF Reports</span>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK SUMMARY -->
+<section style="padding-block:80px;background:#fff;">
+  <div style="max-width:1000px;margin-inline:auto;padding-inline:24px;">
+    <div class="fade-up" data-animate style="text-align:center;margin-bottom:48px;">
+      <span class="eyebrow" style="justify-content:center;color:var(--color-arca);">At a Glance</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.5rem,2.6vw,2rem);font-weight:800;color:var(--color-navy);letter-spacing:-.02em;margin-top:8px;">What ARCA does</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="fade-up" data-animate>
+      <div style="padding:24px;border:1px solid var(--color-border);border-radius:14px;">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--color-navy);margin-bottom:8px;">Live session mode</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--color-text-muted);">Trial-by-trial data collection with full and verbal prompt hierarchies, probe and teaching trial modes, and real-time IOA reliability checks between therapists.</p>
+      </div>
+      <div style="padding:24px;border:1px solid var(--color-border);border-radius:14px;">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--color-navy);margin-bottom:8px;">Programs, targets &amp; behavior tracking</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--color-text-muted);">Mastery criteria, prompt-fading ladders, ABC and frequency/duration data, plus a built-in token economy for in-session reinforcement.</p>
+      </div>
+      <div style="padding:24px;border:1px solid var(--color-border);border-radius:14px;">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--color-navy);margin-bottom:8px;">On-device reporting</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--color-text-muted);">Session, progress, behavior, and treatment-summary PDF reports generated entirely on-device &mdash; nothing rendered on a server.</p>
+      </div>
+      <div style="padding:24px;border:1px solid var(--color-border);border-radius:14px;">
+        <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--color-navy);margin-bottom:8px;">Fully offline, multi-therapist</div>
+        <p style="font-size:14px;line-height:1.7;color:var(--color-text-muted);">Works with no internet connection, with role-based access and local-network sync between paired clinic devices.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="page-cta">
+  <div class="page-cta__inner">
+    <h2 class="page-cta__h2 fade-up" data-animate>See the full ARCA experience</h2>
+    <p class="page-cta__body fade-up" data-animate>Program tracking, the privacy architecture, and real product screenshots &mdash; all on the dedicated ARCA page.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;" class="fade-up" data-animate>
+      <a href="../arca.html" class="btn-arca">View Full Details</a>
+      <a href="../contact.html" class="btn-ghost">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#0B1320;padding-top:80px;">
+  <div style="max-width:1280px;margin-inline:auto;padding-inline:24px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:64px;" class="ftr-grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;"><svg class="pulse-icon" viewBox="0 0 200 100" width="44" height="22" aria-hidden="true"><path class="pulse-techno" d="M 10,50 L 26,50 L 26,26 L 42,26 L 42,73 L 58,73 L 58,38" fill="none" stroke="#6366F1" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><path class="pulse-thera" d="M 58,38 C 70,10 83,90 98,50 C 108,26 118,74 130,50 C 138,38 148,62 158,50 C 168,42 178,58 190,50" fill="none" stroke="#4FB8A8" stroke-width="6" stroke-linecap="round"/><circle class="pulse-node" cx="58" cy="38" r="5" fill="#F0F4F8"/></svg><div style="font-family:var(--font-display);font-size:20px;font-weight:800;"><span style="color:var(--color-indigo);">Techno</span><span style="color:var(--color-teal);">thera</span></div></div>
+      <p style="font-size:14px;line-height:1.8;color:rgba(255,255,255,.5);max-width:260px;">Where Psychology Meets Technology</p>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Products</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="psysights.html" class="ftr-link">PsySights</a>
+        <a href="cognitive-suite.html" class="ftr-link">Cognitive Suite</a>
+        <a href="arca.html" class="ftr-link">ARCA</a>
+        <a href="therassist.html" class="ftr-link">TherAssist</a>
+        <a href="smart-dismissal-system.html" class="ftr-link">Smart Dismissal System</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Company</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="../about.html" class="ftr-link">About</a>
+        <a href="../contact.html" class="ftr-link">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--font-display);font-size:11px;font-weight:700;color:#fff;letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;">Contact</div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <a href="mailto:info@technothera.com" class="ftr-link">info@technothera.com</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin-inline:auto;padding-inline:24px;border-top:1px solid rgba(255,255,255,.07);padding-block:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+    <p style="font-size:12px;color:rgba(255,255,255,.35);">&copy; 2026 Technothera. All Rights Reserved.</p>
+    <div style="display:flex;gap:20px;">
+      <a href="#" class="ftr-link-sm">Privacy Policy</a>
+      <a href="#" class="ftr-link-sm">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+(function(){
+  var dd=document.getElementById('nav-dropdown');
+  var ddm=document.getElementById('nav-dropdown-menu');
+  if(dd&&ddm){var t;dd.addEventListener('mouseenter',function(){clearTimeout(t);ddm.style.display='block';});dd.addEventListener('mouseleave',function(){t=setTimeout(function(){ddm.style.display='none';},120);});}
+  document.querySelectorAll('[data-hero-anim]').forEach(function(el){
+    var delay=parseInt(el.getAttribute('data-hero-anim'))||0;
+    setTimeout(function(){el.style.opacity='1';el.style.transform='none';},delay+100);
+    el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .7s ease-out,transform .7s ease-out';
+  });
+})();
+</script>
+</body>
+</html>
