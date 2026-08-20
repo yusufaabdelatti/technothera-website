@@ -5,7 +5,7 @@ const RECIPIENT = 'technothera@gmail.com';
 const INTEREST_LABELS = {
   psysights: 'PsySights',
   cognitive: 'Cognitive Suite',
-  cue: 'CUE',
+  cue: 'ARCA',
   sds: 'Smart Dismissal System',
   multiple: 'Multiple Products',
   custom: 'Custom System',
